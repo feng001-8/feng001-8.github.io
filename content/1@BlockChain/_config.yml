@@ -1,0 +1,7 @@
+icon: mdi-code-tags # current folder's icon, default to global config.folderIcon
+orderDecider: # current folder's orderDecider, default to global config.orderDecider
+title: BlockChain # current folder's title, default to folder's name
+reverse: # current folder's reverse, default to global config.reverse
+description: 存放区块链的学习 # default to title
+img: # title img
+tags: [] # a string list

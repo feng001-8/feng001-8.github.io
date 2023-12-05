@@ -1,0 +1,20 @@
+title: feng001-8's Blog # site title
+author: "feng001-8" # author github username
+email: "1941744914@qq.com" # author email address
+repo: "https://github.com/feng001-8" # github repo address
+root: posts # root page path
+folderIcon: mdi-folder-outline # mdi icon name
+fileIcon: mdi-file # mdi icon name
+orderDecider: "@" # can be multiple characters
+reverse: false # reverse dirents order
+description: "" # default to title
+headScripts: [] # to append custom scripts
+friends:
+  - title: xxx
+    url: https://example.com/
+    description: xxx
+friendsIcon: mdi-open-in-new
+friendsLabel: Friends
+searchName: "feng Blog" # tab-to-search name, default to title
+searchDescription: "feng's Blog" # tab-to-search description, default to description
+domainName: "" # default to <author>.github.io

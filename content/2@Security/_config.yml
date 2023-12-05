@@ -1,0 +1,7 @@
+icon: mdi-code-tags # current folder's icon, default to global config.folderIcon
+orderDecider: # current folder's orderDecider, default to global config.orderDecider
+title: Security # current folder's title, default to folder's name
+reverse: # current folder's reverse, default to global config.reverse
+description: 存放信息安全和ctf之类的 # default to title
+img: # title img
+tags: [] # a string list
