@@ -2,7 +2,7 @@ title: feng001-8's Blog # site title
 author: "feng001-8" # author github username
 email: "1941744914@qq.com" # author email address
 repo: "https://github.com/feng001-8" # github repo address
-root: posts # root page path
+root: Security # root page path
 folderIcon: mdi-folder-outline # mdi icon name
 fileIcon: mdi-file # mdi icon name
 orderDecider: "@" # can be multiple characters
