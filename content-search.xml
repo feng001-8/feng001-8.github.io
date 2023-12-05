@@ -1,0 +1,7 @@
+
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+  <ShortName>feng Blog</ShortName>
+  <Description>feng's Blog</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Url type="text/html" template="https://feng001-8.github.io/search/{searchTerms}/"/>
+</OpenSearchDescription>
