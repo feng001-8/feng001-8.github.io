@@ -358,7 +358,7 @@ http请求头 header 中可能会存在一些与数据库有交互的数据，�
 
 
 
-![mysql权限](/Users/zhangwenge/Documents/MarkDown/go_super/go photo/mysql权限.png)
+![mysql权限](./_img/1.png)
 
 #### secure_file_priv问题
 

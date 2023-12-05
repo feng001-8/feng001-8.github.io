@@ -23,7 +23,7 @@ description: 文件上传
 
 MIME：（Multipurpose Internet Mail Extensions），MIME是一种标准，用来表示文档、文件或字节流的性质和格式。
 
-![截屏2023-09-13 10.50.38](/Users/zhangwenge/Documents/MarkDown/go_super/go photo/截屏2023-09-13 10.50.38.png)
+![]](./_img/1.png)
 
 **服务器在检测上传的图片时，可能会检测文件的MIME类型。**
 
