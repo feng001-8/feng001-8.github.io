@@ -15,7 +15,7 @@ description: Gin框架下的Zap的使用
 func main() {
 	r := gin.Default()
 	r.GET("/hello", func(c *gin.Context) {
-		c.String("hello liwenzhou.com!")
+		c.String("hello world!")
 	})
 	r.Run(
 }
