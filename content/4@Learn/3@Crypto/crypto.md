@@ -69,7 +69,8 @@ $$
 
 有限域GF（2）计算多项式乘法 <font color="red">57 * 9D</font>
 
-  [1.HEIC](_crypto/1.HEIC) 
+![1](./_img/1.png)
+
 
 #### 课后习题：
 
