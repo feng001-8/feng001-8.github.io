@@ -145,6 +145,8 @@ $$
 
 有限域GF（2）计算多项式乘法 <font color="red">57 * 9D</font>
 
+
+
 <img src="./_img/1.png" alt="1" style="zoom:25%;" />
 
 
