@@ -184,7 +184,29 @@ $$
 
 <img src="./_img/10.png" alt="10" style="zoom:25%;" />
 
+**ECC的加法规则：**
 
+* 两个不同点的加法规则：
+
+$$
+x_3=\lambda^2-x_1-x_2\\
+y_3=\lambda(x_1-x_3)-y_1\\
+\lambda=\frac{y_2-y_1}{x_2-x_1}
+$$
+
+
+
+* 相同点的加   法（倍点规则）：
+
+$$
+x_3=\lambda^2-2x_1\\
+y_3=\lambda(x_1-x_3)-y_1\\
+\lambda=\frac{3x_1^2+a}{2y_1}\,(a为椭圆曲线方程中的一次项系数)
+$$
+
+
+
+<img src="./_img/11.png" alt="11" style="zoom:25%;" />
 
 #### 课后习题：
 
