@@ -145,7 +145,7 @@ $$
 
 有限域GF（2）计算多项式乘法 <font color="red">57 * 9D</font>
 
-![1](./_img/1.png)
+<img src="./_img/1.png" alt="1" style="zoom:25%;" />
 
 
 
@@ -180,7 +180,7 @@ $$
 $$
 难得地方的只有求逆元，举个例子：
 
-![10](./_img/10.png)
+<img src="./_img/10.png" alt="10" style="zoom:25%;" />
 
 
 
