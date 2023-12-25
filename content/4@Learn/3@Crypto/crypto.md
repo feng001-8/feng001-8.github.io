@@ -29,7 +29,7 @@ description: 密码学考试复习
 
 * DES的密钥长度是64位，其余8位是奇偶校验位，所以<font color="red">有效的密钥长度是56位</font>
 
-* 区块链基于两种哈希结构保障数据的不可篡改，即<font color="red">Merkle树和区块链链表</font>
+* 区块链基于两种哈希结构保障数据的不可篡改，即<font color="red">Merkle树和区块链表</font>
 
 * 消息认证码：保证完整性，也保证真实性
 
