@@ -11,4 +11,5 @@ description: 短语
 
 
 
-* keep the day in  mind     记得
+* keep the day in  mind.                                           记得
+*  A direct causal relationship.                               因果关系
