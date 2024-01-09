@@ -348,7 +348,7 @@ description: 第一组同义替换词
     It's doesn't explain how ideas actually spread.
   </p>
 </details>
-* 广泛的 **（widespread）**
+*  广泛的   **(widespread)**
 
 > 影响通过网络的广泛传播                                     the widespread propagation of influence through networks
 >
@@ -392,7 +392,7 @@ description: 第一组同义替换词
     My salary barely covered her household expenses.
   </p>
 </details>
-* 昂贵的 **(expensive)**
+* 昂贵的  **(expensive)**
 
 这个过程烦琐、昂贵且不可靠
 
