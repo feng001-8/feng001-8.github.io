@@ -301,9 +301,10 @@ description: 第一组同义替换词
 
 <details>
   <p>
-    The elimination of the lasy remaining stocks of smallpox virus.
+    The elimination of the last remaining stocks of smallpox virus.
   </p>
 </details>
+
 
 
 
@@ -429,9 +430,10 @@ description: 第一组同义替换词
 
 <details>
   <p>
-    Any such heretics that continued to spread these lies were to be punished.
+    A bill that strictly control the amount of publicity.
   </p>
 </details>
+
 正式语言并非绝对不可获取
 
 <details>
