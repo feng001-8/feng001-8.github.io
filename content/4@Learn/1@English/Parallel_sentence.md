@@ -76,3 +76,20 @@ Ordinary persons fill the void with excitement, yet these excellent ones accompl
  People are all struggling in life. Some rise from the ashes，while others fall to pieces.
 
 人们都在人生的苦难中挣扎，有些浴火重生，有些却粉身碎骨。
+
+
+
+
+
+#### 并列句长难句分析
+
+* 词性对应
+* 成分对应
+
+
+
+1. under modern condition, [this] [requires]  [that **varying meaning** of centrolized control and hence **the help** of specialized scientists such as economists and operational reacher experts].
+2. The [data] [suggest], for example, [that physically atttactive individuals are more likely to be treated well by their parents, sought out as friends, pursued romantically].
+3. There will be television chat shows (hosted by robots),and the cars with pollution monitors (that will disable them when they offend).
+
+* **centralized,offend, disable, economist, operational reacher expert, acquire require inquire**
