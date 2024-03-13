@@ -88,7 +88,7 @@ Ordinary persons fill the void with excitement, yet these excellent ones accompl
 
 
 
-1. under modern condition, [this] [requires]  [that **varying meaning** of centrolized control and hence **the help** of specialized scientists such as economists and operational reacher experts].
+1. under modern condition, [this] [requires]  [ **varying measures** of centrolized control and hence **the help** of specialized scientists such as economists and operational reacher experts].
 2. The [data] [suggest], for example, [that physically atttactive individuals are more likely to be treated well by their parents, sought out as friends, pursued romantically].
 3. There will be television chat shows (hosted by robots),and the cars with pollution monitors (that will disable them when they offend).
 
