@@ -1,6 +1,6 @@
 ---
 title: Sentence
-description: How to Wri a Sentence
+description: How to Write a Sentence
 ---
 
 
