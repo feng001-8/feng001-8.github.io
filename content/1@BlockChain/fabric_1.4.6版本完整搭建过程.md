@@ -1,3 +1,10 @@
+---
+Titile: fabric_1.4.6
+description: 联盟链1.x版本搭建环境
+---
+
+
+
 # fabric_1.4.6版本完整搭建过程
 
 ## 序言
