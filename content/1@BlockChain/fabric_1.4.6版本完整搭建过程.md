@@ -174,11 +174,17 @@ cd /opt/gopath/src/github.com/hyperledger/fabric/scripts
 
 由于网络原因，该脚本可能会中断运行，多运行几次即可。运行完毕之后若镜像有以下镜像则说明成功
 
-
-
 * 手动下载fabric-sample 用来测试网络
 
 > https://github.com/hyperledger/fabric-samples/tree/v1.4.6
+
+```shell
+cd /opt/gopath/src/github.com/hyperledger/fabric/scripts/
+git clone https://github.com/hyperledger/fabric-samples
+cd fabric-samples
+git checkout -b release-1.4.6 
+git branch(查看版本是否是1.4.6)
+```
 
 * 手动下载二进制文件
 
@@ -186,7 +192,26 @@ cd /opt/gopath/src/github.com/hyperledger/fabric/scripts
 
 > [下载hyperledger-fabric-linux-amd64-1.4.6.tar.gz](https://github.com/hyperledger/fabric/releases/tag/v1.4.6)
 
+```shell
+cd /opt/gopath/src/github.com/hyperledger/fabric/scripts/fabric-samples
+wget https://github.com/hyperledger/fabric-ca/releases/download/v1.4.6/hyperledger-fabric-ca-linux-amd64-1.4.6.tar.gz
+tar -zxvf hyperledger-fabric-ca-linux-amd64-1.4.6.tar.gz
+wget https://github.com/hyperledger/fabric/releases/download/v1.4.6/hyperledger-fabric-linux-amd64-1.4.6.tar.gz
+tar -zxvf hyperledger-fabric-linux-amd64-1.4.6.tar.gz
+```
 
+
+
+## Fabric运行
+
+- 执行脚本
+
+  ```shell
+  #cd /opt/gopath/src/github.com/hyperledger/fabric/scripts/fabric-samples/first-network
+  #./byfn.sh up
+  ```
+
+  启动的时候，开始会是有一个“START”的字样，然后经历了一段时间，日志会打印出“END”来表示整个过程已经，至此，`fabric1.4`就正式搭建好环境了
 
 
 
