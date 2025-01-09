@@ -122,7 +122,7 @@ description: How to Write a Sentence
 
 2. 是否构成核心思想、事实、情感或细节描述
 
-![Screenshot 2024-03-13 at 21.09.13](./_img/1.png)
+![](./_img/1.png)
 
 ![Screenshot 2024-03-13 at 21.10.14](./_img/2.png)
 
@@ -132,7 +132,7 @@ description: How to Write a Sentence
 
 #### 2.2 避免乱用定从
 
-**![Screenshot 2024-03-13 at 21.12.47](../../../../../../Library/Application%20Support/typora-user-images/Screenshot%202024-03-13%20at%2021.12.47.png)**
+**![Screenshot 2024-03-13 at 21.12.47](./_img/Screenshot%202024-03-13%20at%2021.12.47.png)**
 
 #### 2.3避免陈词滥调
 
