@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[42],{466:function(n,o){n.exports={title:"Write",description:"如何写作"}}}]);
