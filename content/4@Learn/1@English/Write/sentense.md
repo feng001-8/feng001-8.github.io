@@ -132,7 +132,7 @@ description: How to Write a Sentence
 
 #### 2.2 避免乱用定从
 
-**![Screenshot 2024-03-13 at 21.12.47](./_img/Screenshot%202024-03-13%20at%2021.12.47.png)**
+![7](./_img/7.png)
 
 #### 2.3避免陈词滥调
 
