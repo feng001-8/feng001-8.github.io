@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入op-staking · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入op-staking">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入op-staking">
+  <meta name="twitter:description" content="深入op-staking">
+
+<meta property="og:url" content="http://localhost:1313/posts/op-public-actions/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入op-staking">
+  <meta property="og:description" content="深入op-staking">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="ETH-Staking">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eth-staking/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/rocketpool/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/op-calient/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/op-public-actions/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/op-public-actions/">
+              深入op-staking
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              6-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/ETH-Staking/">ETH-Staking</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth-staking/">ETH-Staking</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="viem-中-op-stack-跨链操作方法解析">
+  Viem 中 OP-Stack 跨链操作方法解析
+  <a class="heading-link" href="#viem-%e4%b8%ad-op-stack-%e8%b7%a8%e9%93%be%e6%93%8d%e4%bd%9c%e6%96%b9%e6%b3%95%e8%a7%a3%e6%9e%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="一核心定位">
+  一、核心定位
+  <a class="heading-link" href="#%e4%b8%80%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Viem 中针对 OP - Stack 的跨链操作方法，主要围绕在 Optimism 技术栈（OP - Stack）生态下，实现 Layer 2（L2）网络（如 Optimism、Base 等）与 Layer 1（L1，以太坊主网）之间资产和数据的交互。涵盖了交易构建以及费用、Gas 估算等关键功能，为开发者简化了跨链操作的复杂流程，抽象了 OP - Stack 特有的底层逻辑，便于更高效地开发基于 OP - Stack 的应用。</p>
+<h3 id="二跨链交易构建方法">
+  二、跨链交易构建方法
+  <a class="heading-link" href="#%e4%ba%8c%e8%b7%a8%e9%93%be%e4%ba%a4%e6%98%93%e6%9e%84%e5%bb%ba%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-builddeposittransaction">
+  1. <code>buildDepositTransaction</code>
+  <a class="heading-link" href="#1-builddeposittransaction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：构建从 L1 向 OP - Stack L2 网络存款的交易对象，用于将 ETH 或兼容的代币从 L1 跨链存入 L2。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>to</code>：L2 接收地址，类型为 <code>Address</code>。</li>
+<li><code>value</code>：存款金额，对于 ETH 以 <code>wei</code> 为单位，类型为 <code>bigint</code>。</li>
+<li><code>l1Chain</code>：L1 的链配置信息。</li>
+<li><code>l2Chain</code>：L2 的链配置信息。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">mainnet</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">buildDepositTransaction</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建 L1 公共客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 创建 L2 公共客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 构建存款交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">depositTx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buildDepositTransaction</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL2&#39;</span>, <span style="color:#75715e">// L2 接收地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">l1Chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Chain</span>: <span style="color:#66d9ef">optimism</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">depositTx</span>);
+</span></span></code></pre></div><h4 id="2-buildprovewithdrawal">
+  2. <code>buildProveWithdrawal</code>
+  <a class="heading-link" href="#2-buildprovewithdrawal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：构建用于在 L1 上证明 L2 提款有效性的交易数据，是 OP - Stack 提款流程中的关键步骤，用于验证提款的合法性，推进提款进入最终化阶段。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>withdrawal</code>：提款对象，包含提款相关的关键信息。</li>
+<li><code>output</code>：对应的 L2 输出根数据，用于验证 L2 状态。</li>
+<li><code>l1Chain</code>：L1 的链配置信息。</li>
+<li><code>l2Chain</code>：L2 的链配置信息。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">mainnet</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">buildProveWithdrawal</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 假设已经获取到提款对象和 L2 输出根数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">withdrawal</span> <span style="color:#f92672">=</span> { <span style="color:#75715e">/* 提款对象数据 */</span> };
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Output</span> <span style="color:#f92672">=</span> { <span style="color:#75715e">/* L2 输出根数据 */</span> };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">proveTx</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">buildProveWithdrawal</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">withdrawal</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">output</span>: <span style="color:#66d9ef">l2Output</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l1Chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Chain</span>: <span style="color:#66d9ef">optimism</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">proveTx</span>);
+</span></span></code></pre></div><h3 id="三费用与-gas-估算方法">
+  三、费用与 Gas 估算方法
+  <a class="heading-link" href="#%e4%b8%89%e8%b4%b9%e7%94%a8%e4%b8%8e-gas-%e4%bc%b0%e7%ae%97%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-estimatecontractl1fee">
+  1. <code>estimateContractL1Fee</code>
+  <a class="heading-link" href="#1-estimatecontractl1fee">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算在 L2 上调用合约操作时，涉及到的 L1 数据费用。由于 OP - Stack 中 L2 交易数据需要同步到 L1，会产生相应的费用，该方法用于计算这部分成本。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>address</code>：L2 合约地址，类型为 <code>Address</code>。</li>
+<li><code>abi</code>：合约的 ABI，类型为 <code>Abi</code>。</li>
+<li><code>functionName</code>：要调用的合约函数名，类型为 <code>string</code>。</li>
+<li><code>args</code>：函数调用的参数，类型为 <code>any[]</code>（可选）。</li>
+<li><code>l2Client</code>：L2 公共客户端实例。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateContractL1Fee</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">erc20Abi</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./erc20Abi.json&#39;</span>; <span style="color:#75715e">// 假设已经有 ERC20 合约 ABI 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Fee</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateContractL1Fee</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xERC20ContractAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0xRecipientAddress&#39;</span>, <span style="color:#ae81ff">100</span><span style="color:#a6e22e">n</span>], <span style="color:#75715e">// 假设转账 100 个代币
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated L1 fee: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">l1Fee</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> wei`</span>);
+</span></span></code></pre></div><h4 id="2-estimatecontractl1gas">
+  2. <code>estimateContractL1Gas</code>
+  <a class="heading-link" href="#2-estimatecontractl1gas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：专门估算 L2 合约调用操作对应的 L1 Gas 消耗量，便于开发者从 Gas 维度进行成本分析和优化。</p>
+<p><strong>关键参数</strong>：与 <code>estimateContractL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateContractL1Gas</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">erc20Abi</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./erc20Abi.json&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Gas</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateContractL1Gas</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xERC20ContractAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0xRecipientAddress&#39;</span>, <span style="color:#ae81ff">100</span><span style="color:#a6e22e">n</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated L1 Gas: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">l1Gas</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> units`</span>);
+</span></span></code></pre></div><h4 id="3-estimatecontracttotalfee">
+  3. <code>estimateContractTotalFee</code>
+  <a class="heading-link" href="#3-estimatecontracttotalfee">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算 L2 合约调用操作的总费用，包括 L2 执行费用以及 L1 数据费用，为开发者和用户提供完整的成本视角。</p>
+<p><strong>关键参数</strong>：与 <code>estimateContractL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateContractTotalFee</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">erc20Abi</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./erc20Abi.json&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">totalFee</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateContractTotalFee</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xERC20ContractAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0xRecipientAddress&#39;</span>, <span style="color:#ae81ff">100</span><span style="color:#a6e22e">n</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated total fee: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">totalFee</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> wei`</span>);
+</span></span></code></pre></div><h4 id="4-estimatecontracttotalgas">
+  4. <code>estimateContractTotalGas</code>
+  <a class="heading-link" href="#4-estimatecontracttotalgas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算 L2 合约调用操作的总 Gas 消耗量，涵盖 L2 执行 Gas 以及 L1 数 Gas，帮助开发者分析和优化合约调用的整体 Gas 效率。</p>
+<p><strong>关键参数</strong>：与 <code>estimateContractL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateContractTotalGas</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">erc20Abi</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./erc20Abi.json&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">totalGas</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateContractTotalGas</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xERC20ContractAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0xRecipientAddress&#39;</span>, <span style="color:#ae81ff">100</span><span style="color:#a6e22e">n</span>],
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated total Gas: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">totalGas</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> units`</span>);
+</span></span></code></pre></div><h4 id="5-estimateinitiatewithdrawalgas">
+  5. <code>estimateInitiateWithdrawalGas</code>
+  <a class="heading-link" href="#5-estimateinitiatewithdrawalgas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算在 L2 上发起提款操作所需的 L2 Gas 消耗量，便于用户和开发者在发起提款前，评估所需的 Gas 成本，确保钱包中有足够的余额支付 Gas。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>to</code>：L1 接收地址，类型为 <code>Address</code>。</li>
+<li><code>value</code>：提款金额，类型为 <code>bigint</code>。</li>
+<li><code>l2Client</code>：L2 公共客户端实例。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateInitiateWithdrawalGas</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initiateWithdrawalGas</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateInitiateWithdrawalGas</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL1&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated Gas for initiating withdrawal: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">initiateWithdrawalGas</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> units`</span>);
+</span></span></code></pre></div><h4 id="6-estimatel1fee">
+  6. <code>estimateL1Fee</code>
+  <a class="heading-link" href="#6-estimatel1fee">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算普通 L2 交易（非合约调用场景，如简单的 ETH 转账）所产生的 L1 数据费用，帮助用户和开发者了解跨链转账时在 L1 上产生的额外成本。</p>
+<p><strong>关键参数</strong>：</p>
+<ul>
+<li><code>transaction</code>：L2 交易对象，包含 <code>to</code>、<code>value</code>、<code>data</code> 等信息，类型为 <code>TransactionRequest</code>。</li>
+<li><code>l2Client</code>：L2 公共客户端实例。</li>
+</ul>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateL1Fee</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Transaction</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他交易相关参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Fee</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateL1Fee</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transaction</span>: <span style="color:#66d9ef">l2Transaction</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated L1 fee for L2 transaction: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">l1Fee</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> wei`</span>);
+</span></span></code></pre></div><h4 id="7-estimatel1gas">
+  7. <code>estimateL1Gas</code>
+  <a class="heading-link" href="#7-estimatel1gas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算普通 L2 交易（非合约调用）所产生的 L1 Gas 消耗量，从 Gas 维度辅助开发者分析和优化 L2 普通交易在 L1 上的资源消耗情况。</p>
+<p><strong>关键参数</strong>：与 <code>estimateL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateL1Gas</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Transaction</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他交易相关参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l1Gas</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateL1Gas</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transaction</span>: <span style="color:#66d9ef">l2Transaction</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated L1 Gas for L2 transaction: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">l1Gas</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> units`</span>);
+</span></span></code></pre></div><h4 id="8-estimatetotalfee">
+  8. <code>estimateTotalFee</code>
+  <a class="heading-link" href="#8-estimatetotalfee">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算普通 L2 交易（非合约调用）的总费用，包括 L2 执行费用以及 L1 数据费用，为用户和开发者提供完整的交易成本信息，以便做出合理的决策。</p>
+<p><strong>关键参数</strong>：与 <code>estimateL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateTotalFee</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Transaction</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他交易相关参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">totalFee</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateTotalFee</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transaction</span>: <span style="color:#66d9ef">l2Transaction</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated total fee for L2 transaction: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">totalFee</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> wei`</span>);
+</span></span></code></pre></div><h4 id="9-estimatetotalgas">
+  9. <code>estimateTotalGas</code>
+  <a class="heading-link" href="#9-estimatetotalgas">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>核心作用</strong>：估算普通 L2 交易（非合约调用）的总 Gas 消耗量，涵盖 L2 执行 Gas 以及 L1 数据 Gas，帮助开发者全面了解交易的 Gas 使用情况，从而进行针对性的优化。</p>
+<p><strong>关键参数</strong>：与 <code>estimateL1Fee</code> 一致。</p>
+<p><strong>示例代码</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">optimism</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/chains&#39;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">estimateTotalGas</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/op - stack/actions&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Client</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">optimism</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://optimism - mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">l2Transaction</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xRecipientAddressInL2&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">1000000000000000000n</span>, <span style="color:#75715e">// 1 ETH 以 wei 为单位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// 其他交易相关参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">totalGas</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">estimateTotalGas</span>({
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">transaction</span>: <span style="color:#66d9ef">l2Transaction</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">l2Client</span>
+</span></span><span style="display:flex;"><span>});
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`Estimated total Gas for L2 transaction: </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">totalGas</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> units`</span>);
+</span></span></code></pre></div><h3 id="四核心价值">
+  四、核心价值
+  <a class="heading-link" href="#%e5%9b%9b%e6%a0%b8%e5%bf%83%e4%bb%b7%e5%80%bc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>降低开发门槛</strong>：通过封装复杂的 OP - Stack 跨链底层逻辑，开发者无需深入了解 OP - Stack 的具体实现细节，就能快速实现跨链存款、提款等功能。</li>
+<li><strong>精准成本把控</strong>：提供全面且细致的费用和 Gas 估算方法，使开发者和用户能够清晰地了解跨链操作的成本构成，有助于进行成本优化和预算管理。</li>
+<li><strong>兼容性强</strong>：适用于所有基于 OP - Stack 的 L2 网络，开发者在不同的 OP - Stack 网络间切换时，能够复用这些方法，提高开发效率。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

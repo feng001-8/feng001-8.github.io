@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sign on feng001-Blog</title>
+    <link>http://localhost:1313/categories/Sign/</link>
+    <description>Recent content in Sign on feng001-Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/categories/Sign/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入sign</title>
+      <link>http://localhost:1313/posts/sign/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/sign/</guid>
+      <description>&lt;h2 id=&#34;以太坊签名与应用&#34;&gt;&#xD;&#xA;  以太坊签名与应用&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%bb%a5%e5%a4%aa%e5%9d%8a%e7%ad%be%e5%90%8d%e4%b8%8e%e5%ba%94%e7%94%a8&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;h3 id=&#34;交易构造与签名&#34;&gt;&#xD;&#xA;  交易构造与签名&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%ba%a4%e6%98%93%e6%9e%84%e9%80%a0%e4%b8%8e%e7%ad%be%e5%90%8d&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;ABI编码&lt;/li&gt;&#xA;&lt;li&gt;构造交易&lt;/li&gt;&#xA;&lt;li&gt;RLP序列化、Hash、签名&lt;/li&gt;&#xA;&lt;li&gt;广播上链&lt;/li&gt;&#xA;&lt;li&gt;签名在节点验证&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/calling.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;注意：&#xA;RLP 序列化 → 哈希 → 签名：给交易 “盖防伪章”&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;RLP 序列化：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;递归长度前缀编码（RLP）是以太坊内置的&lt;strong&gt;数据序列化协议&lt;/strong&gt;，将交易对象的键值对按固定顺序转换为字节流（如 [nonce, gasPrice, gasLimit, to, value, data] 依次编码）。&lt;/li&gt;&#xA;&lt;li&gt;目的：统一数据格式，方便后续哈希和签名。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;哈希：&lt;/strong&gt; 对 RLP 序列化后的字节流计算 keccak256 哈希，得到 &lt;strong&gt;待签名哈希&lt;/strong&gt;（交易的唯一标识雏形）。&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;签名：&lt;/strong&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;用私钥对 “待签名哈希” 加密，生成 r、s、v 三个签名参数：&lt;/li&gt;&#xA;&lt;li&gt;r、s：椭圆曲线加密的两个核心参数；&lt;/li&gt;&#xA;&lt;li&gt;v：恢复公钥的辅助值（还包含链 ID，防止跨链重放攻击，如 EIP-155 改进）。&#xA;&lt;strong&gt;防伪逻辑&lt;/strong&gt;只有私钥持有者能生成有效签名，节点可通过 v 恢复公钥，推导出发送方地址，验证 “交易确实由该地址发起”。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;siwe-以太坊登录eip4361&#34;&gt;&#xD;&#xA;  SIWE 以太坊登录（EIP4361）&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#siwe-%e4%bb%a5%e5%a4%aa%e5%9d%8a%e7%99%bb%e5%bd%95eip4361&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;用户通过签署一段&lt;strong&gt;规范的消息&lt;/strong&gt;来证明对地址的控制权。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

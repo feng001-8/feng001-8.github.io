@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Viem 公共客户端（Public Client） · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入Viem 公共客户端（Public Client）">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Viem 公共客户端（Public Client）">
+  <meta name="twitter:description" content="深入Viem 公共客户端（Public Client）">
+
+<meta property="og:url" content="http://localhost:1313/posts/public-client/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Viem 公共客户端（Public Client）">
+  <meta property="og:description" content="深入Viem 公共客户端（Public Client）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Viem">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-actions/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/test-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-actions/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/public-client/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/public-client/">
+              深入Viem 公共客户端（Public Client）
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Viem/">Viem</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/viem/">Viem</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="viem-公共客户端public-client核心解析">
+  Viem 公共客户端（Public Client）核心解析
+  <a class="heading-link" href="#viem-%e5%85%ac%e5%85%b1%e5%ae%a2%e6%88%b7%e7%ab%afpublic-client%e6%a0%b8%e5%bf%83%e8%a7%a3%e6%9e%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="核心定位">
+  核心定位
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Viem 的 <strong>Public Client</strong> 是专门用于与区块链进行<strong>只读交互</strong>的核心工具，封装了区块链节点的公共 JSON-RPC 接口（如查询区块、交易、合约数据等），无需涉及钱包签名或状态修改操作。它是连接前端应用与区块链节点的桥梁，抽象了底层 RPC 通信细节，提供简洁的 API 接口。</p>
+<h2 id="核心功能">
+  核心功能
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>区块链数据查询</strong>
+提供一系列 “公共操作（Public Actions）”，支持查询链上基础数据：
+<ul>
+<li>区块信息（<code>getBlock</code>、<code>getBlockNumber</code>）</li>
+<li>交易详情（<code>getTransaction</code>、<code>getTransactionReceipt</code>）</li>
+<li>账户数据（<code>getBalance</code>、<code>getCode</code>）</li>
+<li>合约只读方法调用（<code>readContract</code>）</li>
+</ul>
+</li>
+<li><strong>批量请求优化</strong>
+支持 <code>eth_call</code> 聚合（通过 Multicall 合约），将多个合约读取请求合并为一个 RPC 调用，大幅减少网络请求次数，降低 RPC 服务的计算单元（CU）消耗。</li>
+<li><strong>数据缓存与 polling</strong>
+内置缓存机制（可通过 <code>cacheTime</code> 配置），减少重复请求；支持定时轮询（<code>pollingInterval</code>），实时获取链上数据更新。</li>
+</ol>
+<h2 id="核心配置与使用">
+  核心配置与使用
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bd%bf%e7%94%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-初始化公共客户端">
+  1. 初始化公共客户端
+  <a class="heading-link" href="#1-%e5%88%9d%e5%a7%8b%e5%8c%96%e5%85%ac%e5%85%b1%e5%ae%a2%e6%88%b7%e7%ab%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>通过 <code>createPublicClient</code> 创建实例，需指定<strong>传输层（Transport）</strong> 和<strong>区块链网络（Chain）</strong>：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createPublicClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">mainnet</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 连接以太坊主网的公共客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>, <span style="color:#75715e">// 目标区块链网络（内置主流网络配置）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://mainnet.infura.io/v3/YOUR_API_KEY&#39;</span>), <span style="color:#75715e">// 数据传输方式（HTTP/WS）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h4 id="关键配置项">
+  关键配置项：
+  <a class="heading-link" href="#%e5%85%b3%e9%94%ae%e9%85%8d%e7%bd%ae%e9%a1%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong><code>transport</code></strong>（必选）：指定与区块链节点通信的方式，支持 <code>http()</code>、<code>webSocket()</code> 等，负责底层 RPC 请求发送。</p>
+</li>
+<li>
+<p><strong><code>chain</code></strong>（可选）：指定区块链网络（如 <code>mainnet</code>、<code>sepolia</code>），内置网络信息（链 ID、节点 URL 等）。</p>
+</li>
+<li>
+<p><code>batch.multicall</code>（可选）：启用批量请求优化（默认false），合并多个 <code>readContract</code>调用为一个请求。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 启用批量请求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">batch</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">multicall</span>: <span style="color:#66d9ef">true</span> }, <span style="color:#75715e">// 开启聚合
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="2-核心-api-示例">
+  2. 核心 API 示例
+  <a class="heading-link" href="#2-%e6%a0%b8%e5%bf%83-api-%e7%a4%ba%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1查询区块与交易">
+  （1）查询区块与交易
+  <a class="heading-link" href="#1%e6%9f%a5%e8%af%a2%e5%8c%ba%e5%9d%97%e4%b8%8e%e4%ba%a4%e6%98%93">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 获取最新区块号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">blockNumber</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getBlockNumber</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取交易详情
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transaction</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getTransaction</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x...&#39;</span>, <span style="color:#75715e">// 交易哈希
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h4 id="2读取合约数据">
+  （2）读取合约数据
+  <a class="heading-link" href="#2%e8%af%bb%e5%8f%96%e5%90%88%e7%ba%a6%e6%95%b0%e6%8d%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 调用 ERC20 合约的 read 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">balance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">readContract</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x...&#39;</span>, <span style="color:#75715e">// 合约地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>, <span style="color:#75715e">// 合约 ABI
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;balanceOf&#39;</span>, <span style="color:#75715e">// 方法名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0x...&#39;</span>], <span style="color:#75715e">// 方法参数（查询地址）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h4 id="3批量读取合约数据启用-multicall-后">
+  （3）批量读取合约数据（启用 <code>multicall</code> 后）
+  <a class="heading-link" href="#3%e6%89%b9%e9%87%8f%e8%af%bb%e5%8f%96%e5%90%88%e7%ba%a6%e6%95%b0%e6%8d%ae%e5%90%af%e7%94%a8-multicall-%e5%90%8e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 同时调用多个合约方法，仅发送一个 RPC 请求
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">name</span>, <span style="color:#66d9ef">symbol</span>, <span style="color:#a6e22e">totalSupply</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">Promise</span>.<span style="color:#a6e22e">all</span>([
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">readContract</span>({ <span style="color:#a6e22e">address</span>, <span style="color:#a6e22e">abi</span>, <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;name&#39;</span> }),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">readContract</span>({ <span style="color:#a6e22e">address</span>, <span style="color:#a6e22e">abi</span>, <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;symbol&#39;</span> }),
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">readContract</span>({ <span style="color:#a6e22e">address</span>, <span style="color:#a6e22e">abi</span>, <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;totalSupply&#39;</span> }),
+</span></span><span style="display:flex;"><span>])
+</span></span></code></pre></div><h2 id="高级特性">
+  高级特性
+  <a class="heading-link" href="#%e9%ab%98%e7%ba%a7%e7%89%b9%e6%80%a7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-批量请求优化multicall">
+  1. 批量请求优化（Multicall）
+  <a class="heading-link" href="#1-%e6%89%b9%e9%87%8f%e8%af%b7%e6%b1%82%e4%bc%98%e5%8c%96multicall">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>原理</strong>：将多个 <code>eth_call</code> 请求打包为一个 <code>aggregate3</code> 调用，通过 Multicall 合约执行，减少网络往返。</p>
+</li>
+<li>
+<p>配置</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">batch</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">multicall</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">wait</span>: <span style="color:#66d9ef">16</span>, <span style="color:#75715e">// 等待 16ms 再发送批量请求，收集更多调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#a6e22e">batchSize</span>: <span style="color:#66d9ef">512</span>, <span style="color:#75715e">// 每个批量请求的最大字节数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    },
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ...其他配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="2-数据缓存">
+  2. 数据缓存
+  <a class="heading-link" href="#2-%e6%95%b0%e6%8d%ae%e7%bc%93%e5%ad%98">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>通过<code>cacheTime</code>配置缓存时长（默认与<code>pollingInterval</code>一致），避免重复请求相同数据：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">cacheTime</span>: <span style="color:#66d9ef">60_000</span>, <span style="color:#75715e">// 缓存 1 分钟
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#75715e">// ...其他配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="3-自定义-rpc-方法">
+  3. 自定义 RPC 方法
+  <a class="heading-link" href="#3-%e8%87%aa%e5%ae%9a%e4%b9%89-rpc-%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>通过 <code>rpcSchema</code> 扩展自定义 JSON-RPC 方法，支持类型安全调用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">rpcSchema</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 定义自定义 RPC 方法类型
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">type</span> <span style="color:#a6e22e">CustomRpcSchema</span> <span style="color:#f92672">=</span> [{
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;eth_customMethod&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">Parameters</span><span style="color:#f92672">:</span> [<span style="color:#66d9ef">string</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ReturnType</span>: <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>}]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 注册自定义方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">rpcSchema</span>: <span style="color:#66d9ef">rpcSchema</span>&lt;<span style="color:#f92672">CustomRpcSchema</span>&gt;(),
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// ...其他配置
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 调用自定义方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">result</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">request</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;eth_customMethod&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">params</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;param1&#39;</span>],
+</span></span><span style="display:flex;"><span>})
+</span></span></code></pre></div><h2 id="核心价值">
+  核心价值
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e4%bb%b7%e5%80%bc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>简化只读交互</strong>：封装底层 JSON-RPC 细节，提供直观的 API（如 <code>readContract</code>、<code>getBalance</code>）。</li>
+<li><strong>性能优化</strong>：批量请求减少网络开销，缓存机制降低重复请求。</li>
+<li><strong>多网络支持</strong>：内置主流区块链网络配置，切换网络只需修改 <code>chain</code> 参数。</li>
+<li><strong>类型安全</strong>：基于 TypeScript 设计，自动推断参数和返回值类型，减少开发错误。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

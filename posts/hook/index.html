@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Wagmi hook · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="Wagmi hook">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Wagmi hook">
+  <meta name="twitter:description" content="Wagmi hook">
+
+<meta property="og:url" content="http://localhost:1313/posts/hook/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="Wagmi hook">
+  <meta property="og:description" content="Wagmi hook">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="Wagmi">
+      <meta property="og:see_also" content="http://localhost:1313/posts/connect-wallet/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/read-contract/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/send-transaction/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/write_contract/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/hook/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/hook/">
+              Wagmi hook
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-01T00:00:00Z">
+                August 1, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Wagmi/">Wagmi</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/wagmi/">Wagmi</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="wagmi-提供了丰富的-react-钩子hooks覆盖区块链开发的核心场景账户管理交易处理合约交互网络操作等">
+  Wagmi 提供了丰富的 React 钩子（Hooks），覆盖区块链开发的核心场景（账户管理、交易处理、合约交互、网络操作等）。
+  <a class="heading-link" href="#wagmi-%e6%8f%90%e4%be%9b%e4%ba%86%e4%b8%b0%e5%af%8c%e7%9a%84-react-%e9%92%a9%e5%ad%90hooks%e8%a6%86%e7%9b%96%e5%8c%ba%e5%9d%97%e9%93%be%e5%bc%80%e5%8f%91%e7%9a%84%e6%a0%b8%e5%bf%83%e5%9c%ba%e6%99%af%e8%b4%a6%e6%88%b7%e7%ae%a1%e7%90%86%e4%ba%a4%e6%98%93%e5%a4%84%e7%90%86%e5%90%88%e7%ba%a6%e4%ba%a4%e4%ba%92%e7%bd%91%e7%bb%9c%e6%93%8d%e4%bd%9c%e7%ad%89">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="一账户与连接account--connect">
+  一、账户与连接（Account &amp; Connect）
+  <a class="heading-link" href="#%e4%b8%80%e8%b4%a6%e6%88%b7%e4%b8%8e%e8%bf%9e%e6%8e%a5account--connect">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>用于管理钱包连接状态、账户信息及连接生命周期。</p>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>useAccount</code></td>
+          <td>获取当前连接的钱包账户信息（地址、连接状态、网络 ID 等）</td>
+      </tr>
+      <tr>
+          <td><code>useConnect</code></td>
+          <td>管理钱包连接逻辑（获取可用钱包列表、触发连接、处理连接状态）</td>
+      </tr>
+      <tr>
+          <td><code>useDisconnect</code></td>
+          <td>断开当前已连接的钱包</td>
+      </tr>
+      <tr>
+          <td><code>useEnsAvatar</code></td>
+          <td>获取 ENS 域名对应的头像 URL</td>
+      </tr>
+      <tr>
+          <td><code>useEnsName</code></td>
+          <td>将钱包地址解析为 ENS 域名（如 <code>vitalik.eth</code>）</td>
+      </tr>
+      <tr>
+          <td><code>useProvider</code></td>
+          <td>获取当前连接钱包的 JSON-RPC Provider（用于直接与区块链交互）</td>
+      </tr>
+      <tr>
+          <td><code>useSignMessage</code></td>
+          <td>让钱包签名消息（用于身份验证等场景）</td>
+      </tr>
+      <tr>
+          <td><code>useSignTypedData</code></td>
+          <td>让钱包签名结构化数据（符合 EIP-712 标准，用于更复杂的身份验证）</td>
+      </tr>
+      <tr>
+          <td><code>useWalletClient</code></td>
+          <td>获取当前连接钱包的客户端实例（用于发起交易、签名等操作）</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="二交易处理transactions">
+  二、交易处理（Transactions）
+  <a class="heading-link" href="#%e4%ba%8c%e4%ba%a4%e6%98%93%e5%a4%84%e7%90%86transactions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>用于发送交易、跟踪交易状态及估算 gas。</p>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>useSendTransaction</code></td>
+          <td>发送原生代币转账交易（如 ETH 转账）</td>
+      </tr>
+      <tr>
+          <td><code>useWaitForTransactionReceipt</code></td>
+          <td>跟踪交易确认状态，获取交易收据（包含状态、区块号、gas 用量等）</td>
+      </tr>
+      <tr>
+          <td><code>useEstimateGas</code></td>
+          <td>估算交易或合约调用所需的 gas 数量</td>
+      </tr>
+      <tr>
+          <td><code>useFeeData</code></td>
+          <td>获取当前网络的 gas 费用数据（基础费、优先费等）</td>
+      </tr>
+      <tr>
+          <td><code>useTransaction</code></td>
+          <td>根据交易哈希查询交易详情</td>
+      </tr>
+      <tr>
+          <td><code>useTransactionReceipt</code></td>
+          <td>根据交易哈希查询交易收据（已确认的交易）</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="三合约交互contracts">
+  三、合约交互（Contracts）
+  <a class="heading-link" href="#%e4%b8%89%e5%90%88%e7%ba%a6%e4%ba%a4%e4%ba%92contracts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>用于与智能合约交互（读取数据、写入状态）。</p>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>useReadContract</code></td>
+          <td>调用合约的只读方法（无需消耗 gas，如查询余额、代币信息）</td>
+      </tr>
+      <tr>
+          <td><code>useWriteContract</code></td>
+          <td>调用合约的写入方法（修改区块链状态，消耗 gas，如转账代币、铸造 NFT）</td>
+      </tr>
+      <tr>
+          <td><code>useContractEvent</code></td>
+          <td>监听合约事件（如 ERC20 的 <code>Transfer</code> 事件、NFT 的 <code>Mint</code> 事件）</td>
+      </tr>
+      <tr>
+          <td><code>usePrepareContractWrite</code></td>
+          <td>预计算合约写入交易的参数（如 gas 估算、签名者信息），优化用户体验</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="四网络与区块network--blocks">
+  四、网络与区块（Network &amp; Blocks）
+  <a class="heading-link" href="#%e5%9b%9b%e7%bd%91%e7%bb%9c%e4%b8%8e%e5%8c%ba%e5%9d%97network--blocks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>用于管理区块链网络、区块信息及网络切换。</p>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>useChainId</code></td>
+          <td>获取当前连接的区块链网络 ID（如 <code>1</code> 对应以太坊主网，<code>5</code> 对应 Goerli 测试网）</td>
+      </tr>
+      <tr>
+          <td><code>useChains</code></td>
+          <td>获取配置的所有区块链网络信息</td>
+      </tr>
+      <tr>
+          <td><code>useSwitchChain</code></td>
+          <td>切换钱包连接的区块链网络（需钱包支持该网络）</td>
+      </tr>
+      <tr>
+          <td><code>useBlockNumber</code></td>
+          <td>获取当前区块链的最新区块号</td>
+      </tr>
+      <tr>
+          <td><code>useBlock</code></td>
+          <td>获取指定区块的详细信息（需传入区块号或标签，如 <code>'latest'</code>）</td>
+      </tr>
+      <tr>
+          <td><code>usePublicClient</code></td>
+          <td>获取指定网络的公共 JSON-RPC 客户端（无需钱包连接，用于只读操作）</td>
+      </tr>
+      <tr>
+          <td><code>useWebSocketPublicClient</code></td>
+          <td>获取指定网络的 WebSocket 客户端（用于监听实时区块、事件等）</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="五余额与资产balances--assets">
+  五、余额与资产（Balances &amp; Assets）
+  <a class="heading-link" href="#%e4%ba%94%e4%bd%99%e9%a2%9d%e4%b8%8e%e8%b5%84%e4%ba%a7balances--assets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>用于查询账户余额及资产信息。</p>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>useBalance</code></td>
+          <td>查询指定地址的原生代币余额（如 ETH 余额）</td>
+      </tr>
+      <tr>
+          <td><code>useToken</code></td>
+          <td>查询 ERC20 代币的元数据（名称、符号、小数位等）</td>
+      </tr>
+      <tr>
+          <td><code>useTokenBalance</code></td>
+          <td>查询指定地址的 ERC20 代币余额</td>
+      </tr>
+      <tr>
+          <td><code>useTokens</code></td>
+          <td>批量查询多个 ERC20 代币的元数据</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="六其他工具类钩子">
+  六、其他工具类钩子
+  <a class="heading-link" href="#%e5%85%ad%e5%85%b6%e4%bb%96%e5%b7%a5%e5%85%b7%e7%b1%bb%e9%92%a9%e5%ad%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>钩子名称</th>
+          <th>核心功能</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>use wagmi</code></td>
+          <td>获取 Wagmi 配置信息及内部状态</td>
+      </tr>
+      <tr>
+          <td><code>useMutation</code></td>
+          <td>自定义区块链相关的异步操作（基于 React Query，用于扩展自定义逻辑）</td>
+      </tr>
+      <tr>
+          <td><code>useQuery</code></td>
+          <td>自定义区块链数据查询（基于 React Query，用于扩展只读操作）</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="核心特点总结">
+  核心特点总结
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e7%82%b9%e6%80%bb%e7%bb%93">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>所有钩子均基于 React Query 实现，内置缓存、重试、状态管理（加载 / 成功 / 错误）。</li>
+<li>统一适配多种钱包（MetaMask、WalletConnect 等），无需关注底层差异。</li>
+<li>按功能模块化，覆盖 DApp 开发全流程（从连接钱包到合约交互）。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-wagmi系列">
+        See also in Wagmi系列
+        <a class="heading-link" href="#see-also-in-wagmi%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/connect-wallet/">Wagmi connect-wallet</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="/posts/read-contract/">Wagmi read-contract</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/send-transaction/">Wagmi send-transaction</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/write_contract/">Wagmi write-contract</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

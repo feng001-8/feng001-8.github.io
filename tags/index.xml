@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on feng001-Blog</title>
+    <link>http://localhost:1313/tags/</link>
+    <description>Recent content in Tags on feng001-Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Wagmi</title>
+      <link>http://localhost:1313/tags/wagmi/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/wagmi/</guid>
+      <description>&lt;h2 id=&#34;wagmi&#34;&gt;&#xD;&#xA;  Wagmi&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#wagmi&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>EIP</title>
+      <link>http://localhost:1313/tags/eip/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/eip/</guid>
+      <description>&lt;h2 id=&#34;eip&#34;&gt;&#xD;&#xA;  EIP&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#eip&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;简明介绍本 EIP 的目的和要解决的问题，说明为什么要引入这个标准，现有问题、应用场景、行业需求等，详细描述协议的技术细节：函数接口、事件、数据结构、关键流程等。可以用代码块、伪代码、流程图等形式展现。&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>ETH</title>
+      <link>http://localhost:1313/tags/eth/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/eth/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>ETH-Staking</title>
+      <link>http://localhost:1313/tags/eth-staking/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/eth-staking/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Event</title>
+      <link>http://localhost:1313/tags/event/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/event/</guid>
+      <description>&lt;h2 id=&#34;eip-事件&#34;&gt;&#xD;&#xA;  EIP 事件&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#eip-%e4%ba%8b%e4%bb%b6&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;定义以太坊智能合约事件的声明、编码和链上获取标准。事件用于高效通知合约外部状态变化，方便数据采集和链外索引。&lt;/li&gt;&#xA;&lt;li&gt;事件是追踪资产转移（如代币转账）、合约活动、交易到账等场景的关键。清晰的事件标准有助于：&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;展示用户地址的完整转账记录&lt;/li&gt;&#xA;&lt;li&gt;交易所准确识别用户充值到账&lt;/li&gt;&#xA;&lt;li&gt;钱包与数据服务高效集成&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Rocket</title>
+      <link>http://localhost:1313/tags/rocket/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/rocket/</guid>
+      <description>&lt;h2 id=&#34;rocket&#34;&gt;&#xD;&#xA;  Rocket&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#rocket&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>Sign</title>
+      <link>http://localhost:1313/tags/sign/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/sign/</guid>
+      <description>&lt;h2 id=&#34;sign&#34;&gt;&#xD;&#xA;  Sign&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#sign&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>Viem</title>
+      <link>http://localhost:1313/tags/viem/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/viem/</guid>
+      <description>&lt;h2 id=&#34;viem&#34;&gt;&#xD;&#xA;  Viem&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#viem&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Viem 钱包操作（Wallet Actions） · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入Viem 钱包操作（Wallet Actions）">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Viem 钱包操作（Wallet Actions）">
+  <meta name="twitter:description" content="深入Viem 钱包操作（Wallet Actions）">
+
+<meta property="og:url" content="http://localhost:1313/posts/wallet-actions/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Viem 钱包操作（Wallet Actions）">
+  <meta property="og:description" content="深入Viem 钱包操作（Wallet Actions）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Viem">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-actions/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/test-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-client/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/wallet-actions/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/wallet-actions/">
+              深入Viem 钱包操作（Wallet Actions）
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Viem/">Viem</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/viem/">Viem</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="viem-钱包操作wallet-actions核心与全方法解析">
+  Viem 钱包操作（Wallet Actions）核心与全方法解析
+  <a class="heading-link" href="#viem-%e9%92%b1%e5%8c%85%e6%93%8d%e4%bd%9cwallet-actions%e6%a0%b8%e5%bf%83%e4%b8%8e%e5%85%a8%e6%96%b9%e6%b3%95%e8%a7%a3%e6%9e%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="核心定位">
+  核心定位
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Viem 的 <strong>Wallet Actions</strong> 是与以太坊账户进行<strong>状态修改交互</strong>的标准化接口，直接映射底层 “钱包相关” JSON-RPC 方法（如 <code>eth_sendTransaction</code>、<code>eth_sign</code> 等），需通过钱包客户端（Wallet Client）调用。其核心是<strong>处理需要用户授权和私钥签名的操作</strong>，实现区块链状态修改（如转账、合约交互）和安全验证（如消息签名），是连接用户账户与区块链的 “写操作” 入口。</p>
+<h2 id="全方法分类与详细说明">
+  全方法分类与详细说明
+  <a class="heading-link" href="#%e5%85%a8%e6%96%b9%e6%b3%95%e5%88%86%e7%b1%bb%e4%b8%8e%e8%af%a6%e7%bb%86%e8%af%b4%e6%98%8e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="一账户与权限管理">
+  一、账户与权限管理
+  <a class="heading-link" href="#%e4%b8%80%e8%b4%a6%e6%88%b7%e4%b8%8e%e6%9d%83%e9%99%90%e7%ae%a1%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getAddresses</code></td>
+          <td>获取钱包中已授权的账户地址列表（只读）</td>
+          <td><code>eth_accounts</code></td>
+          <td><code>const addresses = await walletClient.getAddresses()</code></td>
+      </tr>
+      <tr>
+          <td><code>requestAddresses</code></td>
+          <td>请求用户授权访问账户（首次连接钱包时触发）</td>
+          <td><code>eth_requestAccounts</code></td>
+          <td><code>const addresses = await walletClient.requestAddresses()</code></td>
+      </tr>
+      <tr>
+          <td><code>watchAddresses</code></td>
+          <td>监听账户地址变化（如切换钱包账户），触发回调通知</td>
+          <td>自定义事件监听</td>
+          <td><code>const unwatch = walletClient.watchAddresses({ onAddresses: (addrs) =&gt; console.log(addrs) })</code></td>
+      </tr>
+      <tr>
+          <td><code>getPermissions</code></td>
+          <td>查询当前钱包已授予的权限（如交易权限、签名权限）</td>
+          <td><code>wallet_getPermissions</code></td>
+          <td><code>const permissions = await walletClient.getPermissions()</code></td>
+      </tr>
+      <tr>
+          <td><code>requestPermissions</code></td>
+          <td>向用户请求特定权限（如允许发送交易、签名消息）</td>
+          <td><code>wallet_requestPermissions</code></td>
+          <td><code>await walletClient.requestPermissions({ permissions: [{ eth_accounts: {} }] })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="二交易发送与签名">
+  二、交易发送与签名
+  <a class="heading-link" href="#%e4%ba%8c%e4%ba%a4%e6%98%93%e5%8f%91%e9%80%81%e4%b8%8e%e7%ad%be%e5%90%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sendTransaction</code></td>
+          <td>发送完整交易（包含签名和广播流程），最常用的转账 / 合约交互入口</td>
+          <td><code>eth_sendTransaction</code></td>
+          <td><code>typescript const hash = await walletClient.sendTransaction({ account: '0x...', to: '0x...', value: parseEther('0.1') })</code></td>
+      </tr>
+      <tr>
+          <td><code>signTransaction</code></td>
+          <td>仅对交易签名（不广播），返回签名后的交易数据（支持离线签名场景）</td>
+          <td><code>eth_signTransaction</code></td>
+          <td><code>typescript const signedTx = await walletClient.signTransaction({ account: '0x...', to: '0x...', value: 100n })</code></td>
+      </tr>
+      <tr>
+          <td><code>sendRawTransaction</code></td>
+          <td>发送已签名的原始交易（需提前用 <code>signTransaction</code> 生成）</td>
+          <td><code>eth_sendRawTransaction</code></td>
+          <td><code>typescript const hash = await walletClient.sendRawTransaction({ serializedTransaction: signedTx })</code></td>
+      </tr>
+      <tr>
+          <td><code>prepareTransactionRequest</code></td>
+          <td>预构造交易参数（自动填充 nonce、gas 价格等），简化交易发送流程</td>
+          <td>组合 <code>eth_getTransactionCount</code> 等</td>
+          <td><code>typescript const request = await walletClient.prepareTransactionRequest({ to: '0x...', value: 100n })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="三合约交互">
+  三、合约交互
+  <a class="heading-link" href="#%e4%b8%89%e5%90%88%e7%ba%a6%e4%ba%a4%e4%ba%92">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层逻辑</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>writeContract</code></td>
+          <td>调用合约写方法（修改链状态），自动封装签名和交易发送流程（最常用）</td>
+          <td>基于 <code>eth_sendTransaction</code> 封装</td>
+          <td><code>typescript const hash = await walletClient.writeContract({ address: '0x合约地址', abi: erc20Abi, functionName: 'transfer', args: ['0x接收地址', 100n], account: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>simulateContract</code></td>
+          <td>模拟合约调用（不实际发送交易），用于验证参数和执行逻辑（预检查）</td>
+          <td>基于 <code>eth_call</code> 封装</td>
+          <td><code>typescript const { request } = await walletClient.simulateContract({ address: '0x合约地址', abi: erc20Abi, functionName: 'transfer', args: ['0x...', 100n] })</code></td>
+      </tr>
+      <tr>
+          <td><code>estimateContractGas</code></td>
+          <td>估算合约方法执行所需的 Gas 用量（辅助交易参数配置）</td>
+          <td>基于 <code>eth_estimateGas</code> 封装</td>
+          <td><code>typescript const gas = await walletClient.estimateContractGas({ address: '0x合约地址', abi: erc20Abi, functionName: 'approve', args: ['0x...', 1000n] })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="四消息与数据签名">
+  四、消息与数据签名
+  <a class="heading-link" href="#%e5%9b%9b%e6%b6%88%e6%81%af%e4%b8%8e%e6%95%b0%e6%8d%ae%e7%ad%be%e5%90%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>signMessage</code></td>
+          <td>对普通文本消息签名（用于身份验证、授权证明等）</td>
+          <td><code>eth_sign</code> / <code>personal_sign</code></td>
+          <td><code>typescript const signature = await walletClient.signMessage({ account: '0x...', message: '请验证我的身份' })</code></td>
+      </tr>
+      <tr>
+          <td><code>signTypedData</code></td>
+          <td>对结构化数据签名（符合 EIP-712 标准，支持复杂数据验证）</td>
+          <td><code>eth_signTypedData_v4</code></td>
+          <td><code>typescript const signature = await walletClient.signTypedData({ account: '0x...', domain: { name: 'MyDApp' }, types: { Message: [{ name: 'content', type: 'string' }] }, message: { content: 'Hello' } })</code></td>
+      </tr>
+      <tr>
+          <td><code>verifyMessage</code></td>
+          <td>验证消息签名的有效性（通过签名反推签名者地址）</td>
+          <td>本地密码学验证</td>
+          <td><code>typescript const address = await walletClient.verifyMessage({ message: 'Hello', signature: '0x...' })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="五网络与资产管理">
+  五、网络与资产管理
+  <a class="heading-link" href="#%e4%ba%94%e7%bd%91%e7%bb%9c%e4%b8%8e%e8%b5%84%e4%ba%a7%e7%ae%a1%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>switchChain</code></td>
+          <td>切换钱包连接的区块链网络（如从以太坊主网切换到 Sepolia 测试网）</td>
+          <td><code>wallet_switchEthereumChain</code></td>
+          <td><code>typescript await walletClient.switchChain({ chainId: 1 }) // 切换到主网</code></td>
+      </tr>
+      <tr>
+          <td><code>addChain</code></td>
+          <td>向钱包添加新的区块链网络（如添加 Polygon、Arbitrum 等）</td>
+          <td><code>wallet_addEthereumChain</code></td>
+          <td><code>typescript await walletClient.addChain({ chainId: 137, name: 'Polygon', rpcUrls: ['https://polygon.llamarpc.com'] })</code></td>
+      </tr>
+      <tr>
+          <td><code>watchAsset</code></td>
+          <td>让钱包追踪特定资产（如 ERC20 代币、NFT），显示在钱包资产列表中</td>
+          <td><code>wallet_watchAsset</code></td>
+          <td><code>typescript await walletClient.watchAsset({ type: 'ERC20', options: { address: '0x代币地址', symbol: 'TOKEN' } })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="六批量交易eip-5792-相关">
+  六、批量交易（EIP-5792 相关）
+  <a class="heading-link" href="#%e5%85%ad%e6%89%b9%e9%87%8f%e4%ba%a4%e6%98%93eip-5792-%e7%9b%b8%e5%85%b3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>核心作用</th>
+          <th>底层标准</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>sendCalls</code></td>
+          <td>发送批量交易（Call Bundle），在单一区块中按顺序执行多笔交易（原子操作）</td>
+          <td>EIP-5792</td>
+          <td><code>typescript const bundleId = await walletClient.sendCalls({ calls: [ { to: '0x...', data: '0x...' }, { to: '0x...', value: 100n } ], blockNumber: 123456n })</code></td>
+      </tr>
+      <tr>
+          <td><code>getCallsStatus</code></td>
+          <td>查询批量交易的执行状态（是否被区块包含、各交易结果等）</td>
+          <td>EIP-5792</td>
+          <td><code>typescript const status = await walletClient.getCallsStatus({ bundleId: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>waitForCallsStatus</code></td>
+          <td>监听批量交易状态变化，直到达到预期状态（如 “已上链” 或 “失败”）</td>
+          <td>基于轮询封装</td>
+          <td><code>typescript const finalStatus = await walletClient.waitForCallsStatus({ bundleId: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getCapabilities</code></td>
+          <td>查询钱包对 EIP-5792 等标准的支持能力（如最大批量交易数量）</td>
+          <td>EIP-5792</td>
+          <td><code>typescript const capabilities = await walletClient.getCapabilities()</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="核心设计逻辑">
+  核心设计逻辑
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e8%ae%be%e8%ae%a1%e9%80%bb%e8%be%91">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>用户授权优先</strong>：所有涉及资产和账户的操作（如 <code>sendTransaction</code>、<code>signMessage</code>）必须经过用户显式授权（钱包弹窗确认），确保私钥安全。</li>
+<li><strong>状态修改为核心</strong>：区别于 Public Actions 的 “只读” 特性，Wallet Actions 全部用于 “写操作”，直接导致区块链状态变更（如余额变化、合约存储更新）。</li>
+<li><strong>标准化与兼容性</strong>：严格映射以太坊 JSON-RPC 标准和 EIP 规范（如 EIP-712、EIP-5792），适配主流钱包（MetaMask、Coinbase Wallet 等）和区块链网络。</li>
+</ol>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

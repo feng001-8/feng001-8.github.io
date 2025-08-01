@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Viem 测试客户端（Test Client） · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入Viem 测试客户端（Test Client）">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Viem 测试客户端（Test Client）">
+  <meta name="twitter:description" content="深入Viem 测试客户端（Test Client）">
+
+<meta property="og:url" content="http://localhost:1313/posts/test-client/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Viem 测试客户端（Test Client）">
+  <meta property="og:description" content="深入Viem 测试客户端（Test Client）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Viem">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-actions/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-actions/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/test-client/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/test-client/">
+              深入Viem 测试客户端（Test Client）
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Viem/">Viem</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/viem/">Viem</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="viem-测试客户端test-client核心解析">
+  Viem 测试客户端（Test Client）核心解析
+  <a class="heading-link" href="#viem-%e6%b5%8b%e8%af%95%e5%ae%a2%e6%88%b7%e7%ab%aftest-client%e6%a0%b8%e5%bf%83%e8%a7%a3%e6%9e%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="核心定位">
+  核心定位
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Viem 的 <strong>Test Client</strong> 是专为<strong>本地以太坊测试节点</strong>（如 Anvil、Hardhat、Ganache）设计的交互工具，提供测试环境专属的高级操作能力，用于简化区块链应用的开发、调试和测试流程。它是连接测试节点与应用代码的桥梁，聚焦于 “测试场景构建” 和 “链上状态控制”。</p>
+<h2 id="核心功能">
+  核心功能
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>测试节点专属操作（Test Actions）</strong>
+提供直接控制本地测试节点的功能，支持灵活构建测试场景：
+<ul>
+<li><strong>区块控制</strong>：手动挖矿（<code>mine</code>）、设置区块时间（<code>setNextBlockTimestamp</code>），加速交易确认流程。</li>
+<li><strong>账户模拟</strong>：临时接管任意账户（<code>impersonateAccount</code>），无需私钥即可操作目标账户，方便测试权限逻辑。</li>
+<li><strong>状态修改</strong>：直接修改账户余额（<code>setBalance</code>）、合约代码（<code>setCode</code>）、存储数据（<code>setStorageAt</code>），快速构建特定测试状态。</li>
+<li><strong>费用配置</strong>：自定义基础 Gas 费（<code>setNextBlockBaseFeePerGas</code>），测试不同费用策略下的交易行为。</li>
+</ul>
+</li>
+<li><strong>集成读写功能</strong>
+可通过扩展（<code>extend</code>）集成公共客户端（<code>publicActions</code>）和钱包客户端（<code>walletActions</code>）的功能，在同一客户端中完成：
+<ul>
+<li>读操作（如查询区块、合约数据）；</li>
+<li>写操作（如发送交易、调用合约）；</li>
+<li>测试操作（如挖矿、模拟账户），避免多客户端配置冗余。</li>
+</ul>
+</li>
+</ol>
+<h2 id="核心配置与使用">
+  核心配置与使用
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bd%bf%e7%94%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-初始化测试客户端">
+  1. 初始化测试客户端
+  <a class="heading-link" href="#1-%e5%88%9d%e5%a7%8b%e5%8c%96%e6%b5%8b%e8%af%95%e5%ae%a2%e6%88%b7%e7%ab%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>通过 <code>createTestClient</code> 创建实例，必须指定<strong>测试节点类型（mode）</strong> 和<strong>传输层（Transport）</strong>，通常搭配本地测试链（如 Foundry）使用：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createTestClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">foundry</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 连接 Anvil 本地测试节点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createTestClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">foundry</span>, <span style="color:#75715e">// Foundry 本地链（默认适配 Anvil）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;anvil&#39;</span>, <span style="color:#75715e">// 测试节点类型（支持 anvil、hardhat、ganache）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;http://localhost:8545&#39;</span>), <span style="color:#75715e">// 本地节点 RPC 地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h3 id="2-核心-api-示例">
+  2. 核心 API 示例
+  <a class="heading-link" href="#2-%e6%a0%b8%e5%bf%83-api-%e7%a4%ba%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1基础测试操作">
+  （1）基础测试操作
+  <a class="heading-link" href="#1%e5%9f%ba%e7%a1%80%e6%b5%8b%e8%af%95%e6%93%8d%e4%bd%9c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 挖矿 1 个区块（立即确认交易）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">mine</span>({ <span style="color:#a6e22e">blocks</span>: <span style="color:#66d9ef">1</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 模拟控制目标账户（无需私钥）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">impersonateAccount</span>({ <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x70997970C51812dc3A010C7d01b50e0d17dc79C8&#39;</span> })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 修改账户余额（充值 10 ETH）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">setBalance</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x70997970C51812dc3A010C7d01b50e0d17dc79C8&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">parseEther</span>(<span style="color:#e6db74">&#39;10&#39;</span>), <span style="color:#75715e">// 转换为 wei
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 设置下一个区块的时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">setNextBlockTimestamp</span>({ <span style="color:#a6e22e">timestamp</span>: <span style="color:#66d9ef">1678900000</span> })
+</span></span></code></pre></div><h4 id="2扩展读写功能">
+  （2）扩展读写功能
+  <a class="heading-link" href="#2%e6%89%a9%e5%b1%95%e8%af%bb%e5%86%99%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createTestClient</span>, <span style="color:#a6e22e">http</span>, <span style="color:#a6e22e">publicActions</span>, <span style="color:#a6e22e">walletActions</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">privateKeyToAccount</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/accounts&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 扩展公共和钱包功能，一站式处理读写和测试操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">testClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createTestClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">foundry</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">mode</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;anvil&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>.<span style="color:#a6e22e">extend</span>(<span style="color:#a6e22e">publicActions</span>) <span style="color:#75715e">// 增加读操作（如 getBlockNumber）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>.<span style="color:#a6e22e">extend</span>(<span style="color:#a6e22e">walletActions</span>) <span style="color:#75715e">// 增加写操作（如 sendTransaction）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 读操作：查询最新区块号
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">blockNumber</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">getBlockNumber</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 写操作：发送交易（使用本地账户）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">account</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">privateKeyToAccount</span>(<span style="color:#e6db74">&#39;0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690&#39;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">sendTransaction</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x0000000000000000000000000000000000000000&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">parseEther</span>(<span style="color:#e6db74">&#39;1&#39;</span>),
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 测试操作：挖矿确认交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">await</span> <span style="color:#a6e22e">testClient</span>.<span style="color:#a6e22e">mine</span>({ <span style="color:#a6e22e">blocks</span>: <span style="color:#66d9ef">1</span> })
+</span></span></code></pre></div><h2 id="关键参数说明">
+  关键参数说明
+  <a class="heading-link" href="#%e5%85%b3%e9%94%ae%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>mode</code></td>
+          <td>`anvil</td>
+          <td>hardhat</td>
+      </tr>
+      <tr>
+          <td><code>transport</code></td>
+          <td><code>Transport</code></td>
+          <td>传输层（必填），指定本地测试节点的 RPC 地址（如 <code>http('http://localhost:8545')</code>）。</td>
+      </tr>
+      <tr>
+          <td><code>chain</code></td>
+          <td><code>Chain</code></td>
+          <td>区块链网络（可选），通常使用 <code>foundry</code>（本地测试链）。</td>
+      </tr>
+      <tr>
+          <td><code>account</code></td>
+          <td>`Account</td>
+          <td>Address`</td>
+      </tr>
+      <tr>
+          <td><code>pollingInterval</code></td>
+          <td><code>number</code></td>
+          <td>轮询频率（毫秒，默认 4000），用于监听链上状态更新。</td>
+      </tr>
+  </tbody>
+</table>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

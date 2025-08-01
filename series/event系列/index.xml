@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event系列 on feng001-Blog</title>
+    <link>http://localhost:1313/series/event%E7%B3%BB%E5%88%97/</link>
+    <description>Recent content in Event系列 on feng001-Blog</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 29 Jul 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/series/event%E7%B3%BB%E5%88%97/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>深入事件</title>
+      <link>http://localhost:1313/posts/scan_event/</link>
+      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/scan_event/</guid>
+      <description>&lt;h2 id=&#34;事件索引---数据采集&#34;&gt;&#xD;&#xA;  事件索引 - 数据采集&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%ba%8b%e4%bb%b6%e7%b4%a2%e5%bc%95---%e6%95%b0%e6%8d%ae%e9%87%87%e9%9b%86&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;问题：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;如何展示用户地址的完整的转账记录?&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;交易所如何知道用户充值 USDT / ETH 到账?&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;事件编解码&#34;&gt;&#xD;&#xA;  事件编解码&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%ba%8b%e4%bb%b6%e7%bc%96%e8%a7%a3%e7%a0%81&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;事件签名编码为 Topic0 (非匿名事件),值为: Keccak256(事件签名)&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;日志(log)条目中,还会包含 address, 表示哪个合约抛出的日志。&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Indexed 参数,作为 topic 存储, 最多有 4 个 topic&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;索引的参数是数组和结构体时,topic 编码为 Keccak256 。&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;非 Indexed 参数采用和函数参数编码 一样的规则,非索引事件作为 data 保存&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/event.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;监听链上数据&#34;&gt;&#xD;&#xA;  监听链上数据&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e7%9b%91%e5%90%ac%e9%93%be%e4%b8%8a%e6%95%b0%e6%8d%ae&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;自建后端(从RPC API 从节点读取数据)&lt;/li&gt;&#xA;&lt;li&gt;订阅( subscription)&lt;/li&gt;&#xA;&lt;li&gt;扫块(轮询 Poll / block scanning)&lt;/li&gt;&#xA;&lt;li&gt;第三方数据服务商&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;订阅&#34;&gt;&#xD;&#xA;  订阅&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e8%ae%a2%e9%98%85&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;在区块链数据获取场景中，subscription 是一种实时获取区块链新数据的被动式机制，核心是 &lt;span style=&#34;color:red;&#34;&gt;“节点主动推送，客户端被动接收”，&lt;/span&gt;用于高效、实时地监控区块链上的事件或状态变化。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

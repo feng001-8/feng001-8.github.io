@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Viem 钱包客户端（Wallet Client） · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入Viem 钱包客户端（Wallet Client）">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Viem 钱包客户端（Wallet Client）">
+  <meta name="twitter:description" content="深入Viem 钱包客户端（Wallet Client）">
+
+<meta property="og:url" content="http://localhost:1313/posts/wallet-client/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Viem 钱包客户端（Wallet Client）">
+  <meta property="og:description" content="深入Viem 钱包客户端（Wallet Client）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Viem">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-actions/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/test-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-actions/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/wallet-client/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/wallet-client/">
+              深入Viem 钱包客户端（Wallet Client）
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Viem/">Viem</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/viem/">Viem</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="viem-钱包客户端wallet-client核心解析">
+  Viem 钱包客户端（Wallet Client）核心解析
+  <a class="heading-link" href="#viem-%e9%92%b1%e5%8c%85%e5%ae%a2%e6%88%b7%e7%ab%afwallet-client%e6%a0%b8%e5%bf%83%e8%a7%a3%e6%9e%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="核心定位">
+  核心定位
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Viem 的 <strong>Wallet Client</strong> 是用于与以太坊账户交互的核心工具，专注于<strong>区块链状态修改操作</strong>（如发送交易、签名消息、调用合约写方法等）。它支持两种账户类型：<strong>JSON-RPC 账户</strong>（如 MetaMask 等浏览器钱包）和<strong>本地账户</strong>（如私钥、助记词管理的账户），是处理 “写操作” 的核心组件。</p>
+<h2 id="核心功能">
+  核心功能
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>账户管理</strong>
+<ul>
+<li>支持获取账户地址（<code>getAddresses</code>）、请求账户授权（<code>requestAddresses</code>）。</li>
+<li>兼容 JSON-RPC 账户（依赖外部钱包签名）和本地账户（直接用私钥签名）。</li>
+</ul>
+</li>
+<li><strong>交易与签名</strong>
+<ul>
+<li>发送原生代币转账（<code>sendTransaction</code>）。</li>
+<li>调用合约写方法（<code>writeContract</code>），支持 ABI 编码和签名。</li>
+<li>签名消息（<code>signMessage</code>）、签名交易（<code>signTransaction</code>）等安全操作。</li>
+</ul>
+</li>
+<li><strong>与公共客户端集成</strong>
+可扩展公共客户端（Public Client）的功能（如 <code>publicActions</code>），同时处理读写操作，避免重复配置。</li>
+</ol>
+<h2 id="核心配置与使用">
+  核心配置与使用
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bd%bf%e7%94%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-初始化钱包客户端">
+  1. 初始化钱包客户端
+  <a class="heading-link" href="#1-%e5%88%9d%e5%a7%8b%e5%8c%96%e9%92%b1%e5%8c%85%e5%ae%a2%e6%88%b7%e7%ab%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>通过 <code>createWalletClient</code> 创建实例，需指定<strong>传输层（Transport）</strong>，可选配<strong>账户（Account）</strong> 和<strong>区块链网络（Chain）</strong>。</p>
+<h4 id="1对接-json-rpc-账户如-metamask">
+  （1）对接 JSON-RPC 账户（如 MetaMask）
+  <a class="heading-link" href="#1%e5%af%b9%e6%8e%a5-json-rpc-%e8%b4%a6%e6%88%b7%e5%a6%82-metamask">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createWalletClient</span>, <span style="color:#a6e22e">custom</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">mainnet</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 连接 MetaMask 等浏览器钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">walletClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createWalletClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>, <span style="color:#75715e">// 目标网络
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">custom</span>(window.<span style="color:#a6e22e">ethereum</span><span style="color:#f92672">!</span>), <span style="color:#75715e">// 使用钱包提供的 provider
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 获取钱包地址（需用户授权）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">address</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">requestAddresses</span>()
+</span></span></code></pre></div><h4 id="2使用本地账户如私钥">
+  （2）使用本地账户（如私钥）
+  <a class="heading-link" href="#2%e4%bd%bf%e7%94%a8%e6%9c%ac%e5%9c%b0%e8%b4%a6%e6%88%b7%e5%a6%82%e7%a7%81%e9%92%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createWalletClient</span>, <span style="color:#a6e22e">http</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">privateKeyToAccount</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/accounts&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">mainnet</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 从私钥创建本地账户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">account</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">privateKeyToAccount</span>(<span style="color:#e6db74">&#39;0x你的私钥...&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 初始化钱包客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">walletClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createWalletClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account</span>, <span style="color:#75715e">// 挂载本地账户（可选，避免每次操作传账户）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(<span style="color:#e6db74">&#39;https://mainnet.infura.io/v3/你的API密钥&#39;</span>), <span style="color:#75715e">// 直接连接节点
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h3 id="2-核心-api-示例">
+  2. 核心 API 示例
+  <a class="heading-link" href="#2-%e6%a0%b8%e5%bf%83-api-%e7%a4%ba%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1发送原生代币转账">
+  （1）发送原生代币转账
+  <a class="heading-link" href="#1%e5%8f%91%e9%80%81%e5%8e%9f%e7%94%9f%e4%bb%a3%e5%b8%81%e8%bd%ac%e8%b4%a6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">parseEther</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 发送 0.001 ETH 到目标地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">sendTransaction</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account</span>: <span style="color:#66d9ef">address</span>, <span style="color:#75715e">// 发送账户（JSON-RPC 账户需显式传入）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC&#39;</span>, <span style="color:#75715e">// 接收地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">value</span>: <span style="color:#66d9ef">parseEther</span>(<span style="color:#e6db74">&#39;0.001&#39;</span>), <span style="color:#75715e">// 金额（转换为 wei）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h4 id="2调用合约写方法">
+  （2）调用合约写方法
+  <a class="heading-link" href="#2%e8%b0%83%e7%94%a8%e5%90%88%e7%ba%a6%e5%86%99%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#75715e">// 调用 ERC20 合约的 transfer 方法
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">writeContract</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x合约地址&#39;</span>, <span style="color:#75715e">// 合约地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>, <span style="color:#75715e">// 合约 ABI
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>, <span style="color:#75715e">// 方法名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0x接收地址&#39;</span>, <span style="color:#a6e22e">parseEther</span>(<span style="color:#e6db74">&#39;1&#39;</span>)], <span style="color:#75715e">// 方法参数（接收地址和金额）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">account</span>: <span style="color:#66d9ef">address</span>, <span style="color:#75715e">// 签名账户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>})
+</span></span></code></pre></div><h4 id="3扩展公共客户端功能">
+  （3）扩展公共客户端功能
+  <a class="heading-link" href="#3%e6%89%a9%e5%b1%95%e5%85%ac%e5%85%b1%e5%ae%a2%e6%88%b7%e7%ab%af%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-typescript" data-lang="typescript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">createWalletClient</span>, <span style="color:#a6e22e">http</span>, <span style="color:#a6e22e">publicActions</span> } <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 扩展公共客户端功能，同时处理读写操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">walletClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createWalletClient</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">account</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">chain</span>: <span style="color:#66d9ef">mainnet</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">transport</span>: <span style="color:#66d9ef">http</span>(),
+</span></span><span style="display:flex;"><span>}).<span style="color:#a6e22e">extend</span>(<span style="color:#a6e22e">publicActions</span>) <span style="color:#75715e">// 扩展公共操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 先用公共客户端模拟交易（读操作）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">request</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">simulateContract</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x合约地址&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">abi</span>: <span style="color:#66d9ef">erc20Abi</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">functionName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;transfer&#39;</span>,
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">args</span><span style="color:#f92672">:</span> [<span style="color:#e6db74">&#39;0x接收地址&#39;</span>, <span style="color:#ae81ff">100</span><span style="color:#a6e22e">n</span>],
+</span></span><span style="display:flex;"><span>})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 再用钱包客户端发送交易（写操作）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">hash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">writeContract</span>(<span style="color:#a6e22e">request</span>)
+</span></span></code></pre></div><h2 id="关键参数说明">
+  关键参数说明
+  <a class="heading-link" href="#%e5%85%b3%e9%94%ae%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>account</code></td>
+          <td>`Account</td>
+          <td>Address`</td>
+      </tr>
+      <tr>
+          <td><code>chain</code></td>
+          <td><code>Chain</code></td>
+          <td>目标区块链网络，用于校验交易网络是否匹配钱包当前网络。</td>
+      </tr>
+      <tr>
+          <td><code>transport</code></td>
+          <td><code>Transport</code></td>
+          <td>传输层，JSON-RPC 账户用 <code>custom(window.ethereum)</code>，本地账户用 <code>http()</code>。</td>
+      </tr>
+      <tr>
+          <td><code>pollingInterval</code></td>
+          <td><code>number</code></td>
+          <td>轮询频率（毫秒），用于监听交易状态等实时更新（默认 4000ms）。</td>
+      </tr>
+      <tr>
+          <td><code>cacheTime</code></td>
+          <td><code>number</code></td>
+          <td>缓存时长（毫秒），减少重复请求（默认与 <code>pollingInterval</code> 一致）。</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="核心价值">
+  核心价值
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e4%bb%b7%e5%80%bc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>统一接口</strong>：无论对接外部钱包还是本地账户，均通过相同 API 处理写操作。</li>
+<li><strong>安全签名</strong>：JSON-RPC 账户的签名在外部钱包完成，本地账户支持私钥安全管理。</li>
+<li><strong>功能扩展</strong>：可集成公共客户端功能，一站式处理读写操作，简化代码。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

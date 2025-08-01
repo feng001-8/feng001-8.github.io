@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  项目 · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="
+  🚀 多链代币管理与交互服务
+  
+    
+    链接到标题
+  
+
+TOKEN
+多链代币管理后端服务，支持主流公链（Ethereum、BSC、Solana、Tron 等）的资产管理与链上交互，适用于钱包、区块链工具等场景。
+
+  ✅ 核心亮点
+  
+    
+    链接到标题
+  
+
+
+兼容多链协议：支持 ERC-20、TRC20 等标准，统一代币信息查询与转账接口
+丰富资产功能：支持代币信息查询、地址余额与记录获取、安全转账（私钥签名）
+安全与扩展性：集成地址和合约校验，保障操作安全，易于扩展新链和新协议
+
+
+  ✅ 技术栈
+  
+    
+    链接到标题
+  
+
+
+语言：Go
+框架：Kratos 微服务架构（DDD 设计思想）
+集成：链级 SDK（如 go-ethereum、tron-go 等）
+
+
+
+  💸 DeFi 技术文章与合约笔记库
+  
+    
+    链接到标题
+  
+
+defi
+记录个人在去中心化金融（DeFi）领域的技术探索与学习，包括智能合约范例、协议分析、工程实践、踩坑经验等，适合开发者查阅和交流。
+
+  ✅ 主要内容
+  
+    
+    链接到标题
+  
+
+
+合约源码笔记：常用功能模块及协议的 Solidity 合约实现
+技术文章：DeFi 协议原理解析、开发技巧、常见安全问题分析
+工程实践：合约部署、测试流程、工具链使用等经验分享
+踩坑总结：开发与实战过程中遇到的问题及解决方案
+
+
+
+  ⚡ Layer2 技术与生态实践
+  
+    
+    链接到标题
+  
+
+Layer2
+聚焦 Layer2 技术方向的学习与工程实践，涵盖主流 Layer2 扩容方案（如 Rollup、ZK-Rollup、OP-Rollup 等）及相关生态工具、原理分析和实战代码。">
+<meta name="keywords" content="Web3、DevOps和区块链的博客">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="项目">
+  <meta name="twitter:description" content="🚀 多链代币管理与交互服务链接到标题TOKEN
+多链代币管理后端服务，支持主流公链（Ethereum、BSC、Solana、Tron 等）的资产管理与链上交互，适用于钱包、区块链工具等场景。
+✅ 核心亮点链接到标题兼容多链协议：支持 ERC-20、TRC20 等标准，统一代币信息查询与转账接口 丰富资产功能：支持代币信息查询、地址余额与记录获取、安全转账（私钥签名） 安全与扩展性：集成地址和合约校验，保障操作安全，易于扩展新链和新协议 ✅ 技术栈链接到标题语言：Go 框架：Kratos 微服务架构（DDD 设计思想） 集成：链级 SDK（如 go-ethereum、tron-go 等） 💸 DeFi 技术文章与合约笔记库链接到标题defi
+记录个人在去中心化金融（DeFi）领域的技术探索与学习，包括智能合约范例、协议分析、工程实践、踩坑经验等，适合开发者查阅和交流。
+✅ 主要内容链接到标题合约源码笔记：常用功能模块及协议的 Solidity 合约实现 技术文章：DeFi 协议原理解析、开发技巧、常见安全问题分析 工程实践：合约部署、测试流程、工具链使用等经验分享 踩坑总结：开发与实战过程中遇到的问题及解决方案 ⚡ Layer2 技术与生态实践链接到标题Layer2
+聚焦 Layer2 技术方向的学习与工程实践，涵盖主流 Layer2 扩容方案（如 Rollup、ZK-Rollup、OP-Rollup 等）及相关生态工具、原理分析和实战代码。">
+
+<meta property="og:url" content="http://localhost:1313/zh-cn/projects/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="项目">
+  <meta property="og:description" content="🚀 多链代币管理与交互服务链接到标题TOKEN
+多链代币管理后端服务，支持主流公链（Ethereum、BSC、Solana、Tron 等）的资产管理与链上交互，适用于钱包、区块链工具等场景。
+✅ 核心亮点链接到标题兼容多链协议：支持 ERC-20、TRC20 等标准，统一代币信息查询与转账接口 丰富资产功能：支持代币信息查询、地址余额与记录获取、安全转账（私钥签名） 安全与扩展性：集成地址和合约校验，保障操作安全，易于扩展新链和新协议 ✅ 技术栈链接到标题语言：Go 框架：Kratos 微服务架构（DDD 设计思想） 集成：链级 SDK（如 go-ethereum、tron-go 等） 💸 DeFi 技术文章与合约笔记库链接到标题defi
+记录个人在去中心化金融（DeFi）领域的技术探索与学习，包括智能合约范例、协议分析、工程实践、踩坑经验等，适合开发者查阅和交流。
+✅ 主要内容链接到标题合约源码笔记：常用功能模块及协议的 Solidity 合约实现 技术文章：DeFi 协议原理解析、开发技巧、常见安全问题分析 工程实践：合约部署、测试流程、工具链使用等经验分享 踩坑总结：开发与实战过程中遇到的问题及解决方案 ⚡ Layer2 技术与生态实践链接到标题Layer2
+聚焦 Layer2 技术方向的学习与工程实践，涵盖主流 Layer2 扩容方案（如 Rollup、ZK-Rollup、OP-Rollup 等）及相关生态工具、原理分析和实战代码。">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/zh-cn/projects/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/zh-cn/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/about/">关于</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/posts/">博客</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/projects/">项目</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/search/">搜索</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/categories/">分类</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/zh-cn/contact/">联系我</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/projects/">English</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="http://localhost:1313/zh-cn/projects/">
+          项目
+        </a>
+      </h1>
+    </header>
+
+    <h3 id="-多链代币管理与交互服务">
+  🚀 多链代币管理与交互服务
+  <a class="heading-link" href="#-%e5%a4%9a%e9%93%be%e4%bb%a3%e5%b8%81%e7%ae%a1%e7%90%86%e4%b8%8e%e4%ba%a4%e4%ba%92%e6%9c%8d%e5%8a%a1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong><a href="https://github.com/feng001-8/TOKEN"  class="external-link" target="_blank" rel="noopener">TOKEN</a></strong><br>
+多链代币管理后端服务，支持主流公链（Ethereum、BSC、Solana、Tron 等）的资产管理与链上交互，适用于钱包、区块链工具等场景。</p>
+<h4 id="-核心亮点">
+  ✅ 核心亮点
+  <a class="heading-link" href="#-%e6%a0%b8%e5%bf%83%e4%ba%ae%e7%82%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<ul>
+<li><strong>兼容多链协议</strong>：支持 ERC-20、TRC20 等标准，统一代币信息查询与转账接口</li>
+<li><strong>丰富资产功能</strong>：支持代币信息查询、地址余额与记录获取、安全转账（私钥签名）</li>
+<li><strong>安全与扩展性</strong>：集成地址和合约校验，保障操作安全，易于扩展新链和新协议</li>
+</ul>
+<h4 id="-技术栈">
+  ✅ 技术栈
+  <a class="heading-link" href="#-%e6%8a%80%e6%9c%af%e6%a0%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<ul>
+<li><strong>语言</strong>：Go</li>
+<li><strong>框架</strong>：Kratos 微服务架构（DDD 设计思想）</li>
+<li><strong>集成</strong>：链级 SDK（如 go-ethereum、tron-go 等）</li>
+</ul>
+<hr>
+<h3 id="-defi-技术文章与合约笔记库">
+  💸 DeFi 技术文章与合约笔记库
+  <a class="heading-link" href="#-defi-%e6%8a%80%e6%9c%af%e6%96%87%e7%ab%a0%e4%b8%8e%e5%90%88%e7%ba%a6%e7%ac%94%e8%ae%b0%e5%ba%93">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong><a href="https://github.com/feng001-8/defi"  class="external-link" target="_blank" rel="noopener">defi</a></strong><br>
+记录个人在去中心化金融（DeFi）领域的技术探索与学习，包括智能合约范例、协议分析、工程实践、踩坑经验等，适合开发者查阅和交流。</p>
+<h4 id="-主要内容">
+  ✅ 主要内容
+  <a class="heading-link" href="#-%e4%b8%bb%e8%a6%81%e5%86%85%e5%ae%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<ul>
+<li><strong>合约源码笔记</strong>：常用功能模块及协议的 Solidity 合约实现</li>
+<li><strong>技术文章</strong>：DeFi 协议原理解析、开发技巧、常见安全问题分析</li>
+<li><strong>工程实践</strong>：合约部署、测试流程、工具链使用等经验分享</li>
+<li><strong>踩坑总结</strong>：开发与实战过程中遇到的问题及解决方案</li>
+</ul>
+<hr>
+<h3 id="-layer2-技术与生态实践">
+  ⚡ Layer2 技术与生态实践
+  <a class="heading-link" href="#-layer2-%e6%8a%80%e6%9c%af%e4%b8%8e%e7%94%9f%e6%80%81%e5%ae%9e%e8%b7%b5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong><a href="https://github.com/feng001-8/Layer2"  class="external-link" target="_blank" rel="noopener">Layer2</a></strong><br>
+聚焦 Layer2 技术方向的学习与工程实践，涵盖主流 Layer2 扩容方案（如 Rollup、ZK-Rollup、OP-Rollup 等）及相关生态工具、原理分析和实战代码。</p>
+<h4 id="-主要内容-1">
+  ✅ 主要内容
+  <a class="heading-link" href="#-%e4%b8%bb%e8%a6%81%e5%86%85%e5%ae%b9-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Layer2 协议笔记</strong>：Rollup、ZK-Rollup、Optimistic Rollup 等扩容技术原理解析</li>
+<li><strong>实战工程</strong>：Layer2 相关合约、跨链桥、数据接口等代码实现与实践</li>
+<li><strong>技术文章</strong>：扩容机制、Layer2 生态项目分析、开发流程梳理</li>
+<li><strong>工具与资源</strong>：主流 Layer2 开发工具链、测试网资源整理</li>
+<li><strong>经验分享</strong>：Layer2 开发与部署、常见问题及解决方案总结</li>
+</ul>
+<hr>
+<h3 id="-uniswap-v2-原理与工程实践">
+  🦄 Uniswap V2 原理与工程实践
+  <a class="heading-link" href="#-uniswap-v2-%e5%8e%9f%e7%90%86%e4%b8%8e%e5%b7%a5%e7%a8%8b%e5%ae%9e%e8%b7%b5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong><a href="https://github.com/feng001-8/UniswapV2"  class="external-link" target="_blank" rel="noopener">UniswapV2</a></strong><br>
+深度解析 Uniswap V2 自动做市商（AMM）协议原理及合约实现，包含核心机制学习、源代码解读与工程化部署，适合开发者理解 DEX 基础与二次开发。</p>
+<hr>
+<h3 id="-blockchain-区块链开发与工程实践">
+  🔗 BlockChain 区块链开发与工程实践
+  <a class="heading-link" href="#-blockchain-%e5%8c%ba%e5%9d%97%e9%93%be%e5%bc%80%e5%8f%91%e4%b8%8e%e5%b7%a5%e7%a8%8b%e5%ae%9e%e8%b7%b5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong><a href="https://github.com/feng001-8/BlockChain"  class="external-link" target="_blank" rel="noopener">BlockChain</a></strong><br>
+区块链底层技术学习与工程实践仓库，涵盖核心原理、网络协议、共识机制、智能合约等内容，适合区块链开发者系统性理解区块链技术栈并进行实际项目开发。</p>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

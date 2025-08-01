@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Viem 公共操作（Public Actions） · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入Viem 公共操作（Public Actions）">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Viem 公共操作（Public Actions）">
+  <meta name="twitter:description" content="深入Viem 公共操作（Public Actions）">
+
+<meta property="og:url" content="http://localhost:1313/posts/public-actions/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Viem 公共操作（Public Actions）">
+  <meta property="og:description" content="深入Viem 公共操作（Public Actions）">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Viem">
+      <meta property="og:see_also" content="http://localhost:1313/posts/public-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/test-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-client/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-actions/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/public-actions/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/public-actions/">
+              深入Viem 公共操作（Public Actions）
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Viem/">Viem</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/viem/">Viem</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h1 id="viem-公共操作public-actions核心解析与全方法列表">
+  Viem 公共操作（Public Actions）核心解析与全方法列表
+  <a class="heading-link" href="#viem-%e5%85%ac%e5%85%b1%e6%93%8d%e4%bd%9cpublic-actions%e6%a0%b8%e5%bf%83%e8%a7%a3%e6%9e%90%e4%b8%8e%e5%85%a8%e6%96%b9%e6%b3%95%e5%88%97%e8%a1%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="核心定位">
+  核心定位
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Viem 中的 <strong>Public Actions</strong> 是与以太坊区块链进行<strong>只读交互</strong>的标准化接口，直接映射底层 JSON-RPC 方法（如 <code>eth_blockNumber</code>、<code>eth_getBalance</code> 等），通过 ** 公共客户端（Public Client）** 调用，无需权限验证或签名操作，是获取区块链公开数据的核心手段。</p>
+<h2 id="核心特性">
+  核心特性
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e7%89%b9%e6%80%a7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ol>
+<li><strong>只读性</strong>
+所有操作均为查询，不修改链状态，无需消耗 Gas。</li>
+<li><strong>无权限要求</strong>
+任何应用均可调用，适合获取公开链上数据（如区块、交易、合约状态）。</li>
+<li><strong>一一映射 RPC 方法</strong>
+每个方法对应一个以太坊标准 RPC 接口，Viem 提供类型安全的封装。</li>
+</ol>
+<h2 id="全方法分类与说明">
+  全方法分类与说明
+  <a class="heading-link" href="#%e5%85%a8%e6%96%b9%e6%b3%95%e5%88%86%e7%b1%bb%e4%b8%8e%e8%af%b4%e6%98%8e">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="一区块相关方法">
+  一、区块相关方法
+  <a class="heading-link" href="#%e4%b8%80%e5%8c%ba%e5%9d%97%e7%9b%b8%e5%85%b3%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getBlockNumber</code></td>
+          <td>获取最新区块号（对应 <code>eth_blockNumber</code>）</td>
+          <td><code>const blockNumber = await publicClient.getBlockNumber()</code></td>
+      </tr>
+      <tr>
+          <td><code>getBlock</code></td>
+          <td>获取区块详情（对应 <code>eth_getBlockByNumber</code> 或 <code>eth_getBlockByHash</code>）</td>
+          <td><code>const block = await publicClient.getBlock({ hash: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getBlockTransactionCount</code></td>
+          <td>获取区块中的交易数量（对应 <code>eth_getBlockTransactionCountByNumber</code>）</td>
+          <td><code>const count = await publicClient.getBlockTransactionCount({ number: 123 })</code></td>
+      </tr>
+      <tr>
+          <td><code>getBlobBaseFee</code></td>
+          <td>获取 Blob 基础费用（对应 <code>eth_blobBaseFee</code>，需支持 EIP-4844 的链）</td>
+          <td><code>const fee = await publicClient.getBlobBaseFee()</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="二交易相关方法">
+  二、交易相关方法
+  <a class="heading-link" href="#%e4%ba%8c%e4%ba%a4%e6%98%93%e7%9b%b8%e5%85%b3%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getTransaction</code></td>
+          <td>获取交易详情（对应 <code>eth_getTransactionByHash</code>）</td>
+          <td><code>const tx = await publicClient.getTransaction({ hash: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getTransactionReceipt</code></td>
+          <td>获取交易收据（对应 <code>eth_getTransactionReceipt</code>）</td>
+          <td><code>const receipt = await publicClient.getTransactionReceipt({ hash: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getTransactionCount</code></td>
+          <td>获取账户的交易计数（对应 <code>eth_getTransactionCount</code>）</td>
+          <td><code>const count = await publicClient.getTransactionCount({ address: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getTransactionConfirmations</code></td>
+          <td>获取交易确认数（基于当前区块号计算）</td>
+          <td><code>const confirmations = await publicClient.getTransactionConfirmations({ hash: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>estimateGas</code></td>
+          <td>估计交易所需的 Gas（对应 <code>eth_estimateGas</code>）</td>
+          <td><code>const gas = await publicClient.estimateGas({ to: '0x...', value: 1n })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="三账户相关方法">
+  三、账户相关方法
+  <a class="heading-link" href="#%e4%b8%89%e8%b4%a6%e6%88%b7%e7%9b%b8%e5%85%b3%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getBalance</code></td>
+          <td>获取账户余额（对应 <code>eth_getBalance</code>）</td>
+          <td><code>const balance = await publicClient.getBalance({ address: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getCode</code></td>
+          <td>获取合约代码（对应 <code>eth_getCode</code>）</td>
+          <td><code>const code = await publicClient.getCode({ address: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>getStorageAt</code></td>
+          <td>获取账户存储位置的值（对应 <code>eth_getStorageAt</code>）</td>
+          <td><code>const value = await publicClient.getStorageAt({ address: '0x...', position: 0n })</code></td>
+      </tr>
+      <tr>
+          <td><code>getProof</code></td>
+          <td>获取账户证明（包括余额、代码、存储等）（对应 <code>eth_getProof</code>）</td>
+          <td><code>const proof = await publicClient.getProof({ address: '0x...' })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="四合约相关方法">
+  四、合约相关方法
+  <a class="heading-link" href="#%e5%9b%9b%e5%90%88%e7%ba%a6%e7%9b%b8%e5%85%b3%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>readContract</code></td>
+          <td>调用合约只读方法（对应 <code>eth_call</code>）</td>
+          <td><code>const balance = await publicClient.readContract({ address: '0x...', abi: erc20Abi, functionName: 'balanceOf', args: ['0x...'] })</code></td>
+      </tr>
+      <tr>
+          <td><code>simulateContract</code></td>
+          <td>模拟合约调用（对应 <code>eth_call</code>，用于验证逻辑但不实际执行）</td>
+          <td><code>const result = await publicClient.simulateContract({ address: '0x...', abi: erc20Abi, functionName: 'transfer', args: ['0x...', 100n] })</code></td>
+      </tr>
+      <tr>
+          <td><code>estimateContractGas</code></td>
+          <td>估计合约方法执行所需的 Gas（对应 <code>eth_estimateGas</code>）</td>
+          <td><code>const gas = await publicClient.estimateContractGas({ address: '0x...', abi: erc20Abi, functionName: 'approve', args: ['0x...', 1000n] })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="五网络与配置方法">
+  五、网络与配置方法
+  <a class="heading-link" href="#%e4%ba%94%e7%bd%91%e7%bb%9c%e4%b8%8e%e9%85%8d%e7%bd%ae%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getChainId</code></td>
+          <td>获取链 ID（对应 <code>eth_chainId</code>）</td>
+          <td><code>const chainId = await publicClient.getChainId()</code></td>
+      </tr>
+      <tr>
+          <td><code>getGasPrice</code></td>
+          <td>获取当前 Gas 价格（对应 <code>eth_gasPrice</code>）</td>
+          <td><code>const gasPrice = await publicClient.getGasPrice()</code></td>
+      </tr>
+      <tr>
+          <td><code>getFeeHistory</code></td>
+          <td>获取 Gas 费用历史（对应 <code>eth_feeHistory</code>）</td>
+          <td><code>const history = await publicClient.getFeeHistory({ oldestBlock: 123 })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="六事件与过滤器方法">
+  六、事件与过滤器方法
+  <a class="heading-link" href="#%e5%85%ad%e4%ba%8b%e4%bb%b6%e4%b8%8e%e8%bf%87%e6%bb%a4%e5%99%a8%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>getLogs</code></td>
+          <td>获取日志（对应 <code>eth_getLogs</code>）</td>
+          <td><code>const logs = await publicClient.getLogs({ address: '0x...', topics: ['0x...'] })</code></td>
+      </tr>
+      <tr>
+          <td><code>createBlockFilter</code></td>
+          <td>创建区块过滤器（对应 <code>eth_newBlockFilter</code>）</td>
+          <td><code>const filterId = await publicClient.createBlockFilter()</code></td>
+      </tr>
+      <tr>
+          <td><code>createEventFilter</code></td>
+          <td>创建事件过滤器（对应 <code>eth_newFilter</code>）</td>
+          <td><code>const filterId = await publicClient.createEventFilter({ address: '0x...', topics: ['0x...'] })</code></td>
+      </tr>
+      <tr>
+          <td><code>getFilterChanges</code></td>
+          <td>获取过滤器变化（对应 <code>eth_getFilterChanges</code>）</td>
+          <td><code>const changes = await publicClient.getFilterChanges({ filterId: '0x...' })</code></td>
+      </tr>
+      <tr>
+          <td><code>uninstallFilter</code></td>
+          <td>卸载过滤器（对应 <code>eth_uninstallFilter</code>）</td>
+          <td><code>const success = await publicClient.uninstallFilter({ filterId: '0x...' })</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="七高级与批量操作">
+  七、高级与批量操作
+  <a class="heading-link" href="#%e4%b8%83%e9%ab%98%e7%ba%a7%e4%b8%8e%e6%89%b9%e9%87%8f%e6%93%8d%e4%bd%9c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>方法名</th>
+          <th>用途与 RPC 映射</th>
+          <th>示例代码</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>multicall</code></td>
+          <td>批量执行多个 Public Actions（支持并行或串行）</td>
+          <td><code>const results = await publicClient.multicall([{ method: 'getBlockNumber' }, { method: 'getBalance', args: [{ address: '0x...' }] }])</code></td>
+      </tr>
+      <tr>
+          <td><code>simulateCalls</code></td>
+          <td>模拟多个调用（用于测试或验证批量操作）</td>
+          <td><code>const outcomes = await publicClient.simulateCalls([{ to: '0x...', value: 1n }, { to: '0x...', data: '0x...' }])</code></td>
+      </tr>
+      <tr>
+          <td><code>simulateBlocks</code></td>
+          <td>模拟多个区块的执行（用于链状态预测）</td>
+          <td><code>const state = await publicClient.simulateBlocks([{ transactions: [...] }])</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="核心价值">
+  核心价值
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e4%bb%b7%e5%80%bc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><strong>简化开发</strong>：通过类型安全的封装避免手动处理 RPC 细节，降低开发门槛。</li>
+<li><strong>高效查询</strong>：支持批量操作（如 <code>multicall</code>）和缓存机制（如 <code>getBlockNumber</code> 的 <code>cacheTime</code> 参数），提升性能。</li>
+<li><strong>灵活扩展</strong>：可通过 <code>call</code> 方法直接发送任意 JSON-RPC 请求，满足自定义需求。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

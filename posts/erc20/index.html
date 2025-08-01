@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入ERC20 · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入ERC20">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入ERC20">
+  <meta name="twitter:description" content="深入ERC20">
+
+<meta property="og:url" content="http://localhost:1313/posts/erc20./">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入ERC20">
+  <meta property="og:description" content="深入ERC20">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="EIP">
+      <meta property="og:see_also" content="http://localhost:1313/posts/abi/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc129/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc4361/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc777/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/erc20./">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/erc20./">
+              深入ERC20
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/EIP/">EIP</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eip/">EIP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="erc20">
+  ERC20
+  <a class="heading-link" href="#erc20">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="问题">
+  问题
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>• 转账无法携带额外的信息。</p>
+<p>• 依靠:授权、授权、授权</p>
+<p>• 误转入合约被锁死。</p>
+<h3 id="流程图">
+  流程图
+  <a class="heading-link" href="#%e6%b5%81%e7%a8%8b%e5%9b%be">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><img src="/images/ERC20.png" alt=""></p>
+<h3 id="example">
+  Example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">BaseERC20</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">public</span> name;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">string</span> <span style="color:#66d9ef">public</span> symbol;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint8</span> <span style="color:#66d9ef">public</span> decimals;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint256</span> <span style="color:#66d9ef">public</span> totalSupply;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint256</span>) balances;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint256</span>)) allowances;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Transfer</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> <span style="color:#66d9ef">from</span>, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> to, <span style="color:#66d9ef">uint256</span> value);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Approval</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> spender, <span style="color:#66d9ef">uint256</span> value);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>() {
+</span></span><span style="display:flex;"><span>        name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;BaseERC20&#34;</span>;
+</span></span><span style="display:flex;"><span>        symbol <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ZWG&#34;</span>;
+</span></span><span style="display:flex;"><span>        decimals <span style="color:#f92672">=</span> <span style="color:#ae81ff">18</span>;
+</span></span><span style="display:flex;"><span>        totalSupply <span style="color:#f92672">=</span> <span style="color:#ae81ff">100000000</span>;
+</span></span><span style="display:flex;"><span>        balances[msg.sender] <span style="color:#f92672">=</span> totalSupply;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">balanceOf</span>(<span style="color:#66d9ef">address</span> _owner) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span> balance) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> balances[_owner];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">transfer</span>(<span style="color:#66d9ef">address</span> _to, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success) {
+</span></span><span style="display:flex;"><span>        require(balances[msg.sender] <span style="color:#f92672">&gt;=</span> _value, <span style="color:#e6db74">&#34;insufficient-balance&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        balances[msg.sender] <span style="color:#f92672">-=</span> _value;
+</span></span><span style="display:flex;"><span>        balances[_to] <span style="color:#f92672">+=</span> _value;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        emit Transfer(msg.sender, _to, _value);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">transferFrom</span>(<span style="color:#66d9ef">address</span> _from, <span style="color:#66d9ef">address</span> _to, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success) {
+</span></span><span style="display:flex;"><span>        require(balances[_from] <span style="color:#f92672">&gt;=</span> _value, <span style="color:#e6db74">&#34;insufficient-balance&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (_from <span style="color:#f92672">!=</span> msg.sender <span style="color:#f92672">&amp;&amp;</span> allowances[_from][msg.sender] <span style="color:#f92672">!=</span> type(<span style="color:#a6e22e">uint256</span>).max) {
+</span></span><span style="display:flex;"><span>            require(allowances[_from][msg.sender] <span style="color:#f92672">&gt;=</span> _value, <span style="color:#e6db74">&#34;insufficient-allowance&#34;</span>);
+</span></span><span style="display:flex;"><span>            allowances[_from][msg.sender] <span style="color:#f92672">-=</span> _value;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        balances[_from] <span style="color:#f92672">-=</span> _value;
+</span></span><span style="display:flex;"><span>        balances[_to] <span style="color:#f92672">+=</span> _value;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        emit Transfer(_from, _to, _value);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">approve</span>(<span style="color:#66d9ef">address</span> _spender, <span style="color:#66d9ef">uint256</span> _value) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span> success) {
+</span></span><span style="display:flex;"><span>        allowances[msg.sender][_spender] <span style="color:#f92672">=</span> _value;
+</span></span><span style="display:flex;"><span>        emit Approval(msg.sender, _spender, _value);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">allowance</span>(<span style="color:#66d9ef">address</span> _owner, <span style="color:#66d9ef">address</span> _spender) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint256</span> remaining) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> allowances[_owner][_spender];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-eip系列">
+        See also in EIP系列
+        <a class="heading-link" href="#see-also-in-eip%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/abi/">深入ABI</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/erc129/">深入ERC129</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="/posts/erc4361/">深入ERC4361</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/erc777/">深入ERC777</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入op-staking · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入op-staking">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入op-staking">
+  <meta name="twitter:description" content="深入op-staking">
+
+<meta property="og:url" content="http://localhost:1313/posts/op-calient/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入op-staking">
+  <meta property="og:description" content="深入op-staking">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="ETH-Staking">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eth-staking/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/rocketpool/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/op-public-actions/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/op-calient/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/op-calient/">
+              深入op-staking
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2024-08-01T00:00:00Z">
+                August 1, 2024
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/ETH-Staking/">ETH-Staking</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth-staking/">ETH-Staking</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="一op-stackclientoptimism-客户端工具">
+  一、op-stack/client（Optimism 客户端工具）
+  <a class="heading-link" href="#%e4%b8%80op-stackclientoptimism-%e5%ae%a2%e6%88%b7%e7%ab%af%e5%b7%a5%e5%85%b7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h4 id="核心作用">
+  核心作用
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e4%bd%9c%e7%94%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>提供与 <strong>OP Stack（Optimism 技术栈）</strong> 交互的客户端工具，简化以太坊 Layer 2（Optimism 等基于 OP Stack 的网络）与 Layer 1（以太坊主网）之间的跨链操作（如存款、提款、状态同步等），封装了 OP Stack 特有的通信逻辑（如跨链消息、输出根验证等）。</p>
+<h4 id="全部关键方法">
+  全部关键方法
+  <a class="heading-link" href="#%e5%85%a8%e9%83%a8%e5%85%b3%e9%94%ae%e6%96%b9%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>createOPStackClient</strong>
+<ul>
+<li>作用：创建 OP Stack 客户端实例，整合 L1（以太坊主网）和 L2（Optimism 等）的 Provider，用于跨链交互。</li>
+<li>参数：<code>{ l1: PublicClient, l2: PublicClient }</code>（L1 和 L2 的公共客户端）。</li>
+<li>返回：OP Stack 客户端实例，包含所有跨链操作方法。</li>
+</ul>
+</li>
+<li><strong>deposit</strong>
+<ul>
+<li>作用：从 L1 向 L2 存款（将 ETH 或 ERC20 从以太坊主网转入 OP Stack L2 网络）。</li>
+<li>参数：
+<ul>
+<li><code>args: { to: Address, value: bigint }</code>（接收地址、存款金额，ETH 场景）；</li>
+<li>（ERC20 场景）额外需传入代币合约地址等参数。</li>
+</ul>
+</li>
+<li>说明：触发 L1 的存款预编译合约，资金将通过跨链消息同步到 L2。</li>
+</ul>
+</li>
+<li><strong>withdraw</strong>
+<ul>
+<li>作用：从 L2 向 L1 发起提款（启动提款流程，需后续验证和最终化）。</li>
+<li>参数：<code>args: { to: Address, value: bigint }</code>（L1 接收地址、提款金额）。</li>
+<li>说明：在 L2 上触发提款交易，生成提款凭证，进入挑战期。</li>
+</ul>
+</li>
+<li><strong>getL2Output</strong>
+<ul>
+<li>作用：获取 L2 网络的输出根（Output Root），用于验证 L2 状态（提款时需验证该根）。</li>
+<li>参数：<code>args: { blockNumber: bigint }</code>（L2 区块号）。</li>
+<li>返回：输出根哈希，包含 L2 该区块的状态摘要。</li>
+</ul>
+</li>
+<li><strong>proveWithdrawal</strong>
+<ul>
+<li>作用：在 L1 上证明提款的有效性（基于 L2 输出根），完成提款的验证步骤。</li>
+<li>参数：<code>args: { withdrawal: Withdrawal, output: L2Output }</code>（提款对象、对应的 L2 输出根）。</li>
+<li>说明：需在 L2 输出根被提交到 L1 后调用，进入提款最终化阶段。</li>
+</ul>
+</li>
+<li><strong>finalizeWithdrawal</strong>
+<ul>
+<li>作用：在 L1 上最终化提款，将资金从 L1 的跨链合约转移到接收地址。</li>
+<li>参数：<code>args: { withdrawal: Withdrawal }</code>（提款对象）。</li>
+<li>说明：需在 proveWithdrawal 成功后，且挑战期结束后调用。</li>
+</ul>
+</li>
+<li><strong>getWithdrawalStatus</strong>
+<ul>
+<li>作用：查询提款的当前状态（如 “已发起”“已证明”“已最终化” 等）。</li>
+<li>参数：<code>args: { withdrawalHash: Hash }</code>（提款哈希）。</li>
+<li>返回：提款状态枚举（如<code>WithdrawalStatus.Initiated</code>）。</li>
+</ul>
+</li>
+<li><strong>waitForL2Output</strong>
+<ul>
+<li>作用：监听并等待 L2 输出根被提交到 L1（用于提款验证前的状态确认）。</li>
+<li>参数：<code>args: { blockNumber: bigint, pollingInterval?: number }</code>（L2 区块号、轮询间隔）。</li>
+<li>返回：当输出根提交到 L1 后返回该输出根信息。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二op-stackchainsop-stack-链配置">
+  二、op-stack/chains（OP Stack 链配置）
+  <a class="heading-link" href="#%e4%ba%8cop-stackchainsop-stack-%e9%93%be%e9%85%8d%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="核心作用-1">
+  核心作用
+  <a class="heading-link" href="#%e6%a0%b8%e5%bf%83%e4%bd%9c%e7%94%a8-1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>提供 <strong>OP Stack 兼容链</strong>（如 Optimism 主网、测试网等）的预定义配置，简化开发者连接和交互 OP Stack 网络的流程，同时支持自定义 OP Stack 链配置。</p>
+<h4 id="全部关键方法及配置">
+  全部关键方法及配置
+  <a class="heading-link" href="#%e5%85%a8%e9%83%a8%e5%85%b3%e9%94%ae%e6%96%b9%e6%b3%95%e5%8f%8a%e9%85%8d%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>预定义 OP Stack 链对象</strong>
+提供主流 OP Stack 网络的现成配置（包含链 ID、RPC 地址、区块浏览器等信息），例如：
+<ul>
+<li><code>optimism</code>：Optimism 主网配置（链 ID：10）。</li>
+<li><code>optimismSepolia</code>：Optimism Sepolia 测试网（链 ID：11155420）。</li>
+<li><code>optimismGoerli</code>（已废弃，由 Sepolia 替代）。</li>
+<li><code>base</code>：Base（基于 OP Stack 的 L2）主网（链 ID：8453）。</li>
+<li><code>baseSepolia</code>：Base Sepolia 测试网（链 ID：84532）。</li>
+</ul>
+</li>
+<li><strong>getOPStackChain</strong>
+<ul>
+<li>作用：根据链 ID 或名称获取预定义的 OP Stack 链配置。</li>
+<li>参数：<code>chainId: number | string</code>（链 ID 或名称，如 10、&lsquo;optimism&rsquo;）。</li>
+<li>返回：链配置对象（包含<code>id</code>、<code>name</code>、<code>rpcUrls</code>、<code>blockExplorers</code>等）。</li>
+</ul>
+</li>
+<li><strong>defineOPStackChain</strong>
+<ul>
+<li>作用：定义自定义 OP Stack 链配置（适用于自建的 OP Stack 网络）。</li>
+<li>参数：<code>config: OPStackChainConfig</code>（链配置，需包含<code>id</code>、<code>name</code>、<code>l1Chain</code>（对应的 L1 链）、<code>rpcUrls</code>等）。</li>
+<li>返回：自定义 OP Stack 链对象，可用于客户端连接。</li>
+</ul>
+</li>
+<li><strong>isOPStackChain</strong>
+<ul>
+<li>作用：判断一个链配置是否为 OP Stack 兼容链。</li>
+<li>参数：<code>chain: Chain</code>（链配置对象）。</li>
+<li>返回：<code>boolean</code>（是否为 OP Stack 链）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结核心">
+  总结核心
+  <a class="heading-link" href="#%e6%80%bb%e7%bb%93%e6%a0%b8%e5%bf%83">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>op-stack/client</strong>：核心是封装 OP Stack 跨链交互逻辑，提供存款、提款全流程（发起→证明→最终化）及状态查询工具，简化 L1 与 L2 的资产和消息交互。</li>
+<li><strong>op-stack/chains</strong>：核心是提供 OP Stack 链的预定义配置和自定义能力，让开发者快速连接主流或自建 OP Stack 网络，无需手动配置链参数。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

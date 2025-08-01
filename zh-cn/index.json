@@ -1,0 +1,25 @@
+[{
+    "title": "关于",
+    "date": "2024-01-28",
+    "permalink": "http://localhost:1313/zh-cn/about/",
+    "content": "\rHi there, I\u0026rsquo;m feng 👋\r链接到标题\r🌐 访问我的网站: your-site.com 📝 阅读我的博客: Blog 🧑‍💻 关注我：Twitter / Instagram 📫 联系方式: Email 🎯 探索我的开源项目和常用工具！ 💻 技术栈\r链接到标题\r🔗 区块链 \u0026amp; Web3\r链接到标题\r合约开发：Solidity, EVM, 以太坊生态 标准协议：ERC-20/ERC-721/ERC-1155 实现与扩展 开发工具：Hardhat, Foundry, Viem/Ethers.js 领域实践：DeFi 基础组件、NFT 应用、Layer2（Optimism/Arbitrum）适配 🛠️ 工具与工程化\r链接到标题\r版本控制：Git, GitHub Flow 工作流 开发环境：VS Code（插件生态）、Postman 接口调试 部署与运维：Docker 容器化、CI/CD 自动化、Linux 服务器管理 主要项目推荐\r链接到标题\r🚀 TOKEN — EVM Token 合约与区块链工具 ⚡ Web3 Tools — 区块链开发者实用工具集 🏗 Smart Contract Boilerplate — Solidity 智能合约项目模板 📚 Knowledge Notes — 区块链/安全/开发笔记 关于我\r链接到标题\r开发者 | 构建者 | 终身学习者\n👨‍💻 喜欢探索新技术，尤其是区块链和 DeFi 🌱 持续学习，热衷分享和开源贡献 🛠 享受构建简单、高效、实用的软件 热爱领域: 区块链、智能合约、DApp、开源项目 座右铭: 让复杂变简单，让简单更强大 ❤️ 联系方式\r链接到标题\r💬 欢迎与区块链开发者和爱好者交流！ 📬 可通过 邮箱 或 Twitter 私信与我联系 在区块链的世界里，代码即规则，合约即信任。\n",
+    "tags": null,
+    "categories": null,
+    "series": null
+  },{
+    "title": "联系我",
+    "date": "0001-01-01",
+    "permalink": "http://localhost:1313/zh-cn/contact/",
+    "content": "关注我，@风。\n",
+    "tags": null,
+    "categories": null,
+    "series": null
+  },{
+    "title": "项目",
+    "date": "0001-01-01",
+    "permalink": "http://localhost:1313/zh-cn/projects/",
+    "content": "\r🚀 多链代币管理与交互服务\r链接到标题\rTOKEN\n多链代币管理后端服务，支持主流公链（Ethereum、BSC、Solana、Tron 等）的资产管理与链上交互，适用于钱包、区块链工具等场景。\n✅ 核心亮点\r链接到标题\r兼容多链协议：支持 ERC-20、TRC20 等标准，统一代币信息查询与转账接口 丰富资产功能：支持代币信息查询、地址余额与记录获取、安全转账（私钥签名） 安全与扩展性：集成地址和合约校验，保障操作安全，易于扩展新链和新协议 ✅ 技术栈\r链接到标题\r语言：Go 框架：Kratos 微服务架构（DDD 设计思想） 集成：链级 SDK（如 go-ethereum、tron-go 等） 💸 DeFi 技术文章与合约笔记库\r链接到标题\rdefi\n记录个人在去中心化金融（DeFi）领域的技术探索与学习，包括智能合约范例、协议分析、工程实践、踩坑经验等，适合开发者查阅和交流。\n✅ 主要内容\r链接到标题\r合约源码笔记：常用功能模块及协议的 Solidity 合约实现 技术文章：DeFi 协议原理解析、开发技巧、常见安全问题分析 工程实践：合约部署、测试流程、工具链使用等经验分享 踩坑总结：开发与实战过程中遇到的问题及解决方案 ⚡ Layer2 技术与生态实践\r链接到标题\rLayer2\n聚焦 Layer2 技术方向的学习与工程实践，涵盖主流 Layer2 扩容方案（如 Rollup、ZK-Rollup、OP-Rollup 等）及相关生态工具、原理分析和实战代码。\n✅ 主要内容\r链接到标题\rLayer2 协议笔记：Rollup、ZK-Rollup、Optimistic Rollup 等扩容技术原理解析 实战工程：Layer2 相关合约、跨链桥、数据接口等代码实现与实践 技术文章：扩容机制、Layer2 生态项目分析、开发流程梳理 工具与资源：主流 Layer2 开发工具链、测试网资源整理 经验分享：Layer2 开发与部署、常见问题及解决方案总结 🦄 Uniswap V2 原理与工程实践\r链接到标题\rUniswapV2\n深度解析 Uniswap V2 自动做市商（AMM）协议原理及合约实现，包含核心机制学习、源代码解读与工程化部署，适合开发者理解 DEX 基础与二次开发。\n🔗 BlockChain 区块链开发与工程实践\r链接到标题\rBlockChain\n区块链底层技术学习与工程实践仓库，涵盖核心原理、网络协议、共识机制、智能合约等内容，适合区块链开发者系统性理解区块链技术栈并进行实际项目开发。\n",
+    "tags": null,
+    "categories": null,
+    "series": null
+  }]

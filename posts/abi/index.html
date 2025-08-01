@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入ABI · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入ABI">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入ABI">
+  <meta name="twitter:description" content="深入ABI">
+
+<meta property="og:url" content="http://localhost:1313/posts/abi/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入ABI">
+  <meta property="og:description" content="深入ABI">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-07-29T00:00:00+00:00">
+    <meta property="article:tag" content="Event">
+    <meta property="article:tag" content="ETH">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc129/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc20./">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc4361/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/erc777/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/abi/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/abi/">
+              深入ABI
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-07-29T00:00:00Z">
+                July 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              One-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Event/">Event</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/event/">Event</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="深入abi">
+  深入ABI
+  <a class="heading-link" href="#%e6%b7%b1%e5%85%a5abi">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="什么是abi">
+  什么是ABI
+  <a class="heading-link" href="#%e4%bb%80%e4%b9%88%e6%98%afabi">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>智能合约应用二进制接口(Application Binary Interface,简称 ABI)是EVM中与合约交互的标准方式:包含接口描述和编码规范</li>
+<li>标准:方便人类阅读、定义接口 使前后端,其他智能合约能够正确地与合约进行交互;</li>
+</ul>
+<p><img src="/images/ABI.png" alt=""></p>
+<h3 id="如何生成-abi">
+  如何生成 ABI
+  <a class="heading-link" href="#%e5%a6%82%e4%bd%95%e7%94%9f%e6%88%90-abi">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>ABI 是编译的产物(solc),使用 Remix 和 Foundry</li>
+<li>forge build Counter.sol
+<ul>
+<li>在 /out/Counter.sol/Counter.json 中包含ABI</li>
+</ul>
+</li>
+<li>forge inspect : 检查和获取智能合约的元数据信息:ABI、字节码&hellip;
+<ul>
+<li>forge inspect Counter abi &ndash;json &gt; Counter.json</li>
+</ul>
+</li>
+</ul>
+<h3 id="abi-接口描述">
+  ABI 接口描述
+  <a class="heading-link" href="#abi-%e6%8e%a5%e5%8f%a3%e6%8f%8f%e8%bf%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>ABI 是一个json 对象数组, 每一个json 对象用来描述函数、事件、错误</li>
+<li>每个json 对象包含:
+<ul>
+<li>type: function, event , error</li>
+<li>name: 函数名称、事件名称..</li>
+<li>inputs / outputs: 函数入参,是一个数组对象,每个数组对象会包含:</li>
+<li>name: 参数名称;</li>
+<li>type: 参数类型</li>
+<li>indexed:事件索引字段(字段是 event topic ,则为 true)</li>
+<li>components: 供元组(tuple) 类型使用(ABI 里只有预定义类型);</li>
+</ul>
+</li>
+<li>stateMutability: 为下列值之一: pure , view , nonpayable 和 payable 。</li>
+</ul>
+<p><img src="/images/ABI_json.png" alt=""></p>
+<h3 id="abi-编解码">
+  ABI 编解码
+  <a class="heading-link" href="#abi-%e7%bc%96%e8%a7%a3%e7%a0%81">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>函数 \ 错误:函数选择器 + 参数编码</p>
+</li>
+<li>
+<p><span style="color:red;">函数选择器:</span>函数签名的 Keccak 哈希的前 4 字节 (也叫函数 ID )</p>
+<ul>
+<li>函数签名: 由函数名和括号中的参数类型列表组成,参数类型列表之间用逗号分隔,<span style="color:red;">不包含参数名称、空格,返回值类型和修饰符。</span></li>
+</ul>
+</li>
+<li>
+<p>参数编码:第5个字节开始,静态(基本)类型扩展到 32 字节表示,动态类型用起始位置、数据大小、真实数据</p>
+</li>
+</ul>
+<p><img src="/images/ABI_decode.png" alt=""></p>
+<h3 id="abi-编码工具">
+  ABI 编码工具
+  <a class="heading-link" href="#abi-%e7%bc%96%e7%a0%81%e5%b7%a5%e5%85%b7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Foundry: cast abi-encode / cast decode-calldata</li>
+<li>Solidity: abi.decode / abi.encode</li>
+<li>viem / ethers.js /</li>
+<li><a href="https://chaintool.tech/calldata"  class="external-link" target="_blank" rel="noopener">https://chaintool.tech/calldata</a></li>
+<li><a href="https://openchain.xyz/"  class="external-link" target="_blank" rel="noopener">https://openchain.xyz/</a></li>
+<li>ABI 数据库: <a href="https://www.4byte.directory/"  class="external-link" target="_blank" rel="noopener">https://www.4byte.directory/</a></li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-eip系列">
+        See also in EIP系列
+        <a class="heading-link" href="#see-also-in-eip%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+        
+          
+            <li>
+              <a href="/posts/erc129/">深入ERC129</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/erc20./">深入ERC20</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/erc4361/">深入ERC4361</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/erc777/">深入ERC777</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
