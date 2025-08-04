@@ -232,13 +232,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h2>
-<p>• 作为 EIP-3074 的替代方案提出</p>
-<p>• 向后兼容现钱包,向前꧋许转为合约钱包(可兼容 ERC4337 )</p>
-<p>• 实现批量交易、Gas 代付,但不引入技术债务</p>
-<p>• 添加新的交易类型,而不是添加指令设置代码,以便让 EOA 可以 delegatecall 合约账户(从而让 EOA 变成 smart
-wallet)</p>
-<p>• 具体是在交易中加入一个 authorization_list</p>
-<p>• authorization_list 为 [chain_id, address, nonce, y_parity, r, s]</p>
+<ul>
+<li>
+<p>作为 EIP-3074 的替代方案提出</p>
+<ul>
+<li>
+<p>向后兼容现钱包,向前允许转为合约钱包(可兼容 ERC4337 )</p>
+</li>
+<li>
+<p>实现批量交易、Gas 代付,但不引入技术债务</p>
+</li>
+</ul>
+</li>
+<li>
+<p>添加新的交易类型,而不是添加指令设置代码,以便让 EOA 可以 delegatecall 合约账户(从而让 EOA 变成 smartwallet)</p>
+<ul>
+<li>
+<p>具体是在交易中加入一个 authorization_list</p>
+</li>
+<li>
+<p>authorization_list 为 [chain_id, address, nonce, y_parity, r, s]</p>
+</li>
+</ul>
+</li>
+</ul>
 
       </div>
 

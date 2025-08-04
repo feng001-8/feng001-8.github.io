@@ -18,7 +18,7 @@
     "title": "深入 EIP-7720",
     "date": "2025-08-02",
     "permalink": "http://localhost:1313/posts/eip7702/",
-    "content": "\rEIP-7702\rLink to heading\r• 作为 EIP-3074 的替代方案提出\n• 向后兼容现钱包,向前꧋许转为合约钱包(可兼容 ERC4337 )\n• 实现批量交易、Gas 代付,但不引入技术债务\n• 添加新的交易类型,而不是添加指令设置代码,以便让 EOA 可以 delegatecall 合约账户(从而让 EOA 变成 smart wallet)\n• 具体是在交易中加入一个 authorization_list\n• authorization_list 为 [chain_id, address, nonce, y_parity, r, s]\n",
+    "content": "\rEIP-7702\rLink to heading\r作为 EIP-3074 的替代方案提出\n向后兼容现钱包,向前允许转为合约钱包(可兼容 ERC4337 )\n实现批量交易、Gas 代付,但不引入技术债务\n添加新的交易类型,而不是添加指令设置代码,以便让 EOA 可以 delegatecall 合约账户(从而让 EOA 变成 smartwallet)\n具体是在交易中加入一个 authorization_list\nauthorization_list 为 [chain_id, address, nonce, y_parity, r, s]\n",
     "tags": ["EIP","Wallet"],
     "categories": ["EIP","Wallet"],
     "series": ["EIP系列"]
