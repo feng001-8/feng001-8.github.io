@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入Permit2 · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入 Permit2">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入Permit2">
+  <meta name="twitter:description" content="深入 Permit2">
+
+<meta property="og:url" content="http://localhost:1313/posts/permit2/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入Permit2">
+  <meta property="og:description" content="深入 Permit2">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="ETH">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/permit2/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/permit2/">
+              深入Permit2
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-01T00:00:00Z">
+                August 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/eth/">ETH</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="permit2">
+  Permit2
+  <a class="heading-link" href="#permit2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="问题">
+  问题
+  <a class="heading-link" href="#%e9%97%ae%e9%a2%98">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>有没有办法让为所有的 Token 合约实现离线授权?</li>
+</ul>
+<h3 id="permit2交互流程">
+  Permit2交互流程:
+  <a class="heading-link" href="#permit2%e4%ba%a4%e4%ba%92%e6%b5%81%e7%a8%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>Alice在一个ERC20上调用 approve ,无限的授权给 Permit2 合约 (在各个链上有相同的地址)</p>
+</li>
+<li>
+<p>Alice签署链下消息:表明协议合约被允许代表她转账代币</p>
+</li>
+<li>
+<p>协议合约上调用一个交互函数,将签署的 permit2 消息作为参数传入</p>
+</li>
+<li>
+<p>Permit2合约上调用 permitTransferFrom, Permit2 按照消息指示转移 Token 到协议</p>
+</li>
+</ul>
+<h3 id="流程图">
+  流程图
+  <a class="heading-link" href="#%e6%b5%81%e7%a8%8b%e5%9b%be">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><img src="/images/Premit2.png" alt=""></p>
+<h3 id="example">
+  example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h3 id="合约">
+  合约
+  <a class="heading-link" href="#%e5%90%88%e7%ba%a6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: SEE LICENSE IN LICENSE
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;./myToken.sol&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;./interfaces/IPermit2.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">TokenBank</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 记录每个地址在银行中的余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">uint256</span>) <span style="color:#66d9ef">public</span> balances;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ERC20代币合约地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    MyToken <span style="color:#66d9ef">public</span> token;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Permit2 合约实例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    IPermit2 <span style="color:#66d9ef">public</span> permit2;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 委托授权结构体
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">DelegateAuthorization</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> owner;        <span style="color:#75715e">// 代币所有者
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">address</span> delegate;     <span style="color:#75715e">// 被委托人
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">uint256</span> amount;       <span style="color:#75715e">// 授权金额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">uint256</span> deadline;     <span style="color:#75715e">// 授权截止时间
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">bool</span> used;           <span style="color:#75715e">// 是否已使用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 委托授权映射：授权哈希 =&gt; 授权信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">bytes32</span> <span style="color:#f92672">=&gt;</span> DelegateAuthorization) <span style="color:#66d9ef">public</span> delegateAuthorizations;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 事件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Deposit</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> user, <span style="color:#66d9ef">uint256</span> amount);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Withdraw</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> user, <span style="color:#66d9ef">uint256</span> amount);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">DelegateAuthorizationCreated</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> delegate, <span style="color:#66d9ef">uint256</span> amount, <span style="color:#66d9ef">uint256</span> deadline, <span style="color:#66d9ef">bytes32</span> authHash);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">DelegateDepositExecuted</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> delegate, <span style="color:#66d9ef">uint256</span> amount, <span style="color:#66d9ef">bytes32</span> authHash);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 构造函数，设置要管理的ERC20代币
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">address</span> _tokenAddress, <span style="color:#66d9ef">address</span> _permit2Address) {
+</span></span><span style="display:flex;"><span>        token <span style="color:#f92672">=</span> MyToken(_tokenAddress);
+</span></span><span style="display:flex;"><span>        permit2 <span style="color:#f92672">=</span> IPermit2(_permit2Address);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 存款函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deposit</span>(<span style="color:#66d9ef">uint256</span> _amount) <span style="color:#66d9ef">external</span> {
+</span></span><span style="display:flex;"><span>        require(_amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Amount must be greater than 0&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(token.balanceOf(msg.sender) <span style="color:#f92672">&gt;=</span> _amount, <span style="color:#e6db74">&#34;Insufficient token balance&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 从用户账户转移代币到合约
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        require(token.transferFrom(msg.sender, <span style="color:#66d9ef">address</span>(this), _amount), <span style="color:#e6db74">&#34;Transfer failed&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 更新用户在银行的余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        balances[msg.sender] <span style="color:#f92672">+=</span> _amount;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        emit Deposit(msg.sender, _amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 取款函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withdraw</span>(<span style="color:#66d9ef">uint256</span> _amount) <span style="color:#66d9ef">external</span> {
+</span></span><span style="display:flex;"><span>        require(_amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Amount must be greater than 0&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(balances[msg.sender] <span style="color:#f92672">&gt;=</span> _amount, <span style="color:#e6db74">&#34;Insufficient bank balance&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 更新用户在银行的余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        balances[msg.sender] <span style="color:#f92672">-=</span> _amount;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 从合约转移代币到用户账户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        require(token.transfer(msg.sender, _amount), <span style="color:#e6db74">&#34;Transfer failed&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        emit Withdraw(msg.sender, _amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 使用 Permit2 进行签名授权存款
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">depositWithPermit2</span>(
+</span></span><span style="display:flex;"><span>        PermitTransferFrom <span style="color:#66d9ef">memory</span> permitData,
+</span></span><span style="display:flex;"><span>        SignatureTransferDetails calldata transferDetails,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> owner,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> calldata signature
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">external</span> {
+</span></span><span style="display:flex;"><span>        require(permitData.permitted.amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Amount must be greater than 0&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(transferDetails.to <span style="color:#f92672">==</span> <span style="color:#66d9ef">address</span>(this), <span style="color:#e6db74">&#34;Transfer must be to TokenBank&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(transferDetails.requestedAmount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Requested amount must be greater than 0&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(transferDetails.requestedAmount <span style="color:#f92672">&lt;=</span> permitData.permitted.amount, <span style="color:#e6db74">&#34;Requested amount exceeds permitted amount&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(block.timestamp <span style="color:#f92672">&lt;=</span> permitData.deadline, <span style="color:#e6db74">&#34;Permit expired&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用 Permit2 执行签名转账
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        permit2.permitTransferFrom(
+</span></span><span style="display:flex;"><span>            permitData,
+</span></span><span style="display:flex;"><span>            transferDetails,
+</span></span><span style="display:flex;"><span>            owner,
+</span></span><span style="display:flex;"><span>            signature
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 更新用户在银行的存款余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        balances[owner] <span style="color:#f92672">+=</span> transferDetails.requestedAmount;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        emit Deposit(owner, transferDetails.requestedAmount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

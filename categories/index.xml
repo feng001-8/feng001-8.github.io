@@ -9,11 +9,25 @@
     <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>ETH</title>
+      <link>http://localhost:1313/categories/eth/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/eth/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Wagmi</title>
       <link>http://localhost:1313/categories/Wagmi/</link>
       <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/categories/Wagmi/</guid>
       <description>&lt;h2 id=&#34;wagmi&#34;&gt;&#xD;&#xA;  Wagmi&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#wagmi&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
+      <title>Wallet</title>
+      <link>http://localhost:1313/categories/Wallet/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/categories/Wallet/</guid>
+      <description>&lt;h2 id=&#34;wallet&#34;&gt;&#xD;&#xA;  Wallet&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#wallet&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
     </item>
     <item>
       <title>EIP</title>

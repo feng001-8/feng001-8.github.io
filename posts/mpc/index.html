@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入MPC · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入MPC">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入MPC">
+  <meta name="twitter:description" content="深入MPC">
+
+<meta property="og:url" content="http://localhost:1313/posts/mpc/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入MPC">
+  <meta property="og:description" content="深入MPC">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="Wallet">
+    <meta property="article:tag" content="ETH">
+      <meta property="og:see_also" content="http://localhost:1313/posts/aa%E9%92%B1%E5%8C%85/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip3074/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-contract/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eoa/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/mpc/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/mpc/">
+              深入MPC
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-01T00:00:00Z">
+                August 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Wallet/">Wallet</a>
+      <span class="separator">•</span>
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/eth/">ETH</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/wallet/">Wallet</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="mpc">
+  MPC
+  <a class="heading-link" href="#mpc">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>
+<p>MPC(Multi-Party Computation)多方计算</p>
+</li>
+<li>
+<p>利用 MPC 技术可将私钥分片, 每个分片由不同的参与方保管, 通过 m/n 个分片聚合出私钥(或签名)。</p>
+</li>
+<li>
+<p>SSS ( Shamir&rsquo;s Secret Sharing ):聚合后签名</p>
+</li>
+<li>
+<p>TSS( Threshold Signature Scheme ):聚合签名 ,大多数项目采用的方案</p>
+</li>
+<li>
+<p>部分分片泄露,私钥仍然安全,降低了单点故障风险</p>
+</li>
+</ul>
+<h3 id="mpc-钱包">
+  MPC 钱包
+  <a class="heading-link" href="#mpc-%e9%92%b1%e5%8c%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>OKX Wallet: 2/3 MPC TSS 方案</p>
+</li>
+<li>
+<p>OKX Cloud 分片</p>
+</li>
+<li>
+<p>用户设备分片</p>
+</li>
+<li>
+<p>Google Cloud、iCloud 等云备份</p>
+</li>
+<li>
+<p>Para MPC 方案:利用 passkey 为 Dapp 应用提供<strong>嵌入式钱包</strong>体验, 2-2 MPC方案</p>
+</li>
+<li>
+<p>用户设备分片、Passkey 云同步(Google Cloud、iCloud 等可跨设备)</p>
+</li>
+<li>
+<p>Para Cloud Share (用户可额外备份)</p>
+</li>
+<li>
+<p>其他的钱包服务商:Dynamic、Turnkey 和 Privy (Stripe 收购)</p>
+</li>
+</ul>
+<p>多个参与方使用各自的私钥分片，通过 MPC 协议协作完成签名，无需重构完整私钥。</p>
+<h3 id="example">
+  example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">http</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">parseEther</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">parseGwei</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">foundry</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;viem/chains&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">createPublicClient</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">createWalletClient</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;viem&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">privateKeyToAccount</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;viem/accounts&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">split</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">combine</span>
+</span></span><span style="display:flex;"><span>} <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;shamirs-secret-sharing&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">dotenv</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;dotenv&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dotenv</span>.<span style="color:#a6e22e">config</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 生成私钥分片
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">generatePrivateKeyShares</span>(<span style="color:#a6e22e">privateKey</span>, <span style="color:#a6e22e">totalShares</span>, <span style="color:#a6e22e">threshold</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 将私钥转换为 Buffer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">privateKeyBuffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">from</span>(<span style="color:#a6e22e">privateKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">2</span>), <span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 生成分片
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">shares</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">split</span>(<span style="color:#a6e22e">privateKeyBuffer</span>, {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">shares</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">totalShares</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">threshold</span>
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">shares</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 从分片恢复私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">recoverPrivateKey</span>(<span style="color:#a6e22e">shares</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 恢复私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">recoveredBuffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">combine</span>(<span style="color:#a6e22e">shares</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;0x&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">recoveredBuffer</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 添加验证函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">verifyShares</span>(<span style="color:#a6e22e">shares</span>, <span style="color:#a6e22e">originalPrivateKey</span>, <span style="color:#a6e22e">threshold</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;\n验证所有分片:&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">allRecoveredKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">recoverPrivateKey</span>(<span style="color:#a6e22e">shares</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;原始私钥:&#39;</span>, <span style="color:#a6e22e">originalPrivateKey</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;使用所有分片恢复的私钥:&#39;</span>, <span style="color:#a6e22e">allRecoveredKey</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;是否一致:&#39;</span>, <span style="color:#a6e22e">originalPrivateKey</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">allRecoveredKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;\n验证部分分片:&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">partialShares</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">shares</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">threshold</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">partialRecoveredKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">recoverPrivateKey</span>(<span style="color:#a6e22e">partialShares</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;使用部分分片恢复的私钥:&#39;</span>, <span style="color:#a6e22e">partialRecoveredKey</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;是否一致:&#39;</span>, <span style="color:#a6e22e">originalPrivateKey</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">partialRecoveredKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">originalPrivateKey</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">partialRecoveredKey</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 模拟 MPC 签名过程
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">mpcSignTransaction</span>(<span style="color:#a6e22e">shares</span>, <span style="color:#a6e22e">threshold</span>, <span style="color:#a6e22e">transaction</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. 恢复私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">recoveredPrivateKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">recoverPrivateKey</span>(<span style="color:#a6e22e">shares</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#a6e22e">threshold</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;恢复的私钥:&#39;</span>, <span style="color:#a6e22e">recoveredPrivateKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">account</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">privateKeyToAccount</span>(<span style="color:#a6e22e">recoveredPrivateKey</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">walletClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createWalletClient</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">account</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">account</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">chain</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">foundry</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">transport</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">RPC_URL</span>)
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. 签名交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signedTx</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">walletClient</span>.<span style="color:#a6e22e">signTransaction</span>(<span style="color:#a6e22e">transaction</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">signedTx</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sendTransactionWithMPC</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 1. 从环境变量获取私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">privateKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PRIVATE_KEY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">privateKey</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;请在 .env 文件中设置 PRIVATE_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;原始私钥:&#39;</span>, <span style="color:#a6e22e">privateKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 2. 创建公共客户端
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">publicClient</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createPublicClient</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">chain</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">foundry</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">transport</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">http</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">RPC_URL</span>)
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 3. 从私钥创建账户
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">account</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">privateKeyToAccount</span>(<span style="color:#a6e22e">privateKey</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">userAddress</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">account</span>.<span style="color:#a6e22e">address</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;账户地址:&#39;</span>, <span style="color:#a6e22e">userAddress</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 4. 生成私钥分片 (5个分片，需要3个分片才能恢复)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">totalShares</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">threshold</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">shares</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">generatePrivateKeyShares</span>(<span style="color:#a6e22e">privateKey</span>, <span style="color:#a6e22e">totalShares</span>, <span style="color:#a6e22e">threshold</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`生成了 </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">totalShares</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> 个私钥分片，需要 </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">threshold</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> 个分片才能恢复私钥`</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 验证分片恢复
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">verifyShares</span>(<span style="color:#a6e22e">shares</span>, <span style="color:#a6e22e">privateKey</span>, <span style="color:#a6e22e">threshold</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 6. 检查网络状态
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">blockNumber</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getBlockNumber</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;当前区块号:&#39;</span>, <span style="color:#a6e22e">blockNumber</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 7. 获取当前 gas 价格
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">gasPrice</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getGasPrice</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;当前 gas 价格:&#39;</span>, <span style="color:#a6e22e">parseGwei</span>(<span style="color:#a6e22e">gasPrice</span>.<span style="color:#a6e22e">toString</span>()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 8. 查询余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">balance</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getBalance</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">userAddress</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;账户余额:&#39;</span>, <span style="color:#a6e22e">parseEther</span>(<span style="color:#a6e22e">balance</span>.<span style="color:#a6e22e">toString</span>()))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 9. 查询 nonce
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">nonce</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">getTransactionCount</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">address</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">userAddress</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;当前 Nonce:&#39;</span>, <span style="color:#a6e22e">nonce</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 10. 构建交易参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txParams</span> <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">account</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">account</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;0x01BF49D75f2b73A2FDEFa7664AEF22C86c5Be3df&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parseEther</span>(<span style="color:#e6db74">&#39;0.001&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">chainId</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">foundry</span>.<span style="color:#a6e22e">id</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">type</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;eip1559&#39;</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">chain</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">foundry</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">maxFeePerGas</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">gasPrice</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span><span style="color:#a6e22e">n</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">maxPriorityFeePerGas</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">parseGwei</span>(<span style="color:#e6db74">&#39;1.5&#39;</span>),
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">gas</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">21000</span><span style="color:#a6e22e">n</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">nonce</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">nonce</span>,
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 12. 使用 MPC 签名交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;开始 MPC 签名过程...&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">signedTx</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">mpcSignTransaction</span>(<span style="color:#a6e22e">shares</span>, <span style="color:#a6e22e">threshold</span>, <span style="color:#a6e22e">txParams</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;MPC 签名完成&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 13. 发送交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txHash</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">sendRawTransaction</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">serializedTransaction</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">signedTx</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Transaction Hash:&#39;</span>, <span style="color:#a6e22e">txHash</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 14. 等待交易确认
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">receipt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">publicClient</span>.<span style="color:#a6e22e">waitForTransactionReceipt</span>({
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">hash</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">txHash</span>
+</span></span><span style="display:flex;"><span>        })
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;交易状态:&#39;</span>, <span style="color:#a6e22e">receipt</span>.<span style="color:#a6e22e">status</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;success&#39;</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#39;成功&#39;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;失败&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;区块号:&#39;</span>, <span style="color:#a6e22e">receipt</span>.<span style="color:#a6e22e">blockNumber</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Gas 使用量:&#39;</span>, <span style="color:#a6e22e">receipt</span>.<span style="color:#a6e22e">gasUsed</span>.<span style="color:#a6e22e">toString</span>())
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">txHash</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;错误:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span> <span style="color:#66d9ef">instanceof</span> Error) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;错误信息:&#39;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">message</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">error</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">error</span> <span style="color:#f92672">===</span> <span style="color:#e6db74">&#39;object&#39;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#e6db74">&#39;details&#39;</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;错误详情:&#39;</span>, <span style="color:#a6e22e">error</span>.<span style="color:#a6e22e">details</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 执行示例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">sendTransactionWithMPC</span>()
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-wallet系列">
+        See also in Wallet系列
+        <a class="heading-link" href="#see-also-in-wallet%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/aa%E9%92%B1%E5%8C%85/">深入AA钱包</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip3074/">深入EIP3074</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/wallet-contract/">深入contract-wallet</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eoa/">深入EOA</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">深入多签钱包</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

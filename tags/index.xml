@@ -9,6 +9,13 @@
     <lastBuildDate>Fri, 01 Aug 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>ETH</title>
+      <link>http://localhost:1313/tags/eth/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/eth/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Wagmi</title>
       <link>http://localhost:1313/tags/wagmi/</link>
       <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
@@ -16,18 +23,18 @@
       <description>&lt;h2 id=&#34;wagmi&#34;&gt;&#xD;&#xA;  Wagmi&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#wagmi&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
     </item>
     <item>
+      <title>Wallet</title>
+      <link>http://localhost:1313/tags/wallet/</link>
+      <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/wallet/</guid>
+      <description>&lt;h2 id=&#34;wallet&#34;&gt;&#xD;&#xA;  Wallet&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#wallet&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
+    </item>
+    <item>
       <title>EIP</title>
       <link>http://localhost:1313/tags/eip/</link>
       <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/eip/</guid>
       <description>&lt;h2 id=&#34;eip&#34;&gt;&#xD;&#xA;  EIP&#xD;&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#eip&#34;&gt;&#xD;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link to heading&#34;&gt;&lt;/i&gt;&#xD;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link to heading&lt;/span&gt;&#xD;&#xA;  &lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;简明介绍本 EIP 的目的和要解决的问题，说明为什么要引入这个标准，现有问题、应用场景、行业需求等，详细描述协议的技术细节：函数接口、事件、数据结构、关键流程等。可以用代码块、伪代码、流程图等形式展现。&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>ETH</title>
-      <link>http://localhost:1313/tags/eth/</link>
-      <pubDate>Tue, 29 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/eth/</guid>
-      <description></description>
     </item>
     <item>
       <title>ETH-Staking</title>

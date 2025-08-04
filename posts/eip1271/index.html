@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入 EIP-1271 · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入 EIP-1271">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入 EIP-1271">
+  <meta name="twitter:description" content="深入 EIP-1271">
+
+<meta property="og:url" content="http://localhost:1313/posts/eip1271/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入 EIP-1271">
+  <meta property="og:description" content="深入 EIP-1271">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-03T00:00:00+00:00">
+    <meta property="article:tag" content="EIP">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip4494/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip7702/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip1559/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip2612/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip712/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/abi/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/eip1271/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/eip1271/">
+              深入 EIP-1271
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-03T00:00:00Z">
+                August 3, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/EIP/">EIP</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eip/">EIP</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="eip-1271">
+  EIP-1271
+  <a class="heading-link" href="#eip-1271">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="eip-1271-解决的核心问题智能合约签名验证">
+  EIP-1271 解决的核心问题：智能合约签名验证
+  <a class="heading-link" href="#eip-1271-%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6%e7%ad%be%e5%90%8d%e9%aa%8c%e8%af%81">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>传统的签名验证只能处理 EOA（外部账户）的签名：</p>
+<ul>
+<li>使用 <code>ecrecover</code> 从签名中恢复签名者地址</li>
+<li>只适用于私钥控制的账户</li>
+</ul>
+<p>但随着智能合约钱包的普及，出现了新问题：</p>
+<ul>
+<li><strong>多签钱包</strong>：需要多个签名才能执行操作</li>
+<li><strong>智能合约钱包</strong>：使用复杂逻辑控制资产</li>
+<li><strong>DAO 治理</strong>：需要验证组织的&quot;集体签名&quot;</li>
+</ul>
+<p>EIP-1271 定义了统一的接口，让智能合约能够：</p>
+<ol>
+<li>实现自定义的签名验证逻辑</li>
+<li>与现有的签名验证系统兼容</li>
+<li>支持复杂的多签、阈值签名等场景</li>
+</ol>
+<h3 id="eip-1271-标准接口">
+  EIP-1271 标准接口
+  <a class="heading-link" href="#eip-1271-%e6%a0%87%e5%87%86%e6%8e%a5%e5%8f%a3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">IERC1271</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 验证签名是否有效
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param hash 要验证的数据哈希
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param signature 签名数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @return magicValue 验证通过返回 0x1626ba7e，否则返回其他值
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isValidSignature</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> hash,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bytes4</span> magicValue);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>说明</strong>：</p>
+<ul>
+<li>成功：<code>0x1626ba7e</code> (bytes4(keccak256(&ldquo;isValidSignature(bytes32,bytes)&rdquo;)))</li>
+<li>失败：返回任何其他值</li>
+</ul>
+<h3 id="示例">
+  示例
+  <a class="heading-link" href="#%e7%a4%ba%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="多签钱包实现">
+  多签钱包实现
+  <a class="heading-link" href="#%e5%a4%9a%e7%ad%be%e9%92%b1%e5%8c%85%e5%ae%9e%e7%8e%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;@openzeppelin/contracts/utils/cryptography/ECDSA.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">MultiSigWallet</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">using</span> ECDSA <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">bytes32</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// EIP-1271 魔数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">bytes4</span> <span style="color:#66d9ef">constant</span> <span style="color:#66d9ef">internal</span> MAGICVALUE <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x1626ba7e</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">public</span> owners;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint256</span> <span style="color:#66d9ef">public</span> threshold; <span style="color:#75715e">// 需要的最少签名数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">memory</span> _owners, <span style="color:#66d9ef">uint256</span> _threshold) {
+</span></span><span style="display:flex;"><span>        require(_threshold <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> _threshold <span style="color:#f92672">&lt;=</span> _owners.length, <span style="color:#e6db74">&#34;Invalid threshold&#34;</span>);
+</span></span><span style="display:flex;"><span>        owners <span style="color:#f92672">=</span> _owners;
+</span></span><span style="display:flex;"><span>        threshold <span style="color:#f92672">=</span> _threshold;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// EIP-1271 实现
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isValidSignature</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> hash,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bytes4</span> magicValue) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 解析多个签名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        require(signature.length <span style="color:#f92672">%</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;Invalid signature length&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint256</span> sigCount <span style="color:#f92672">=</span> signature.length <span style="color:#f92672">/</span> <span style="color:#ae81ff">65</span>;
+</span></span><span style="display:flex;"><span>        require(sigCount <span style="color:#f92672">&gt;=</span> threshold, <span style="color:#e6db74">&#34;Not enough signatures&#34;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">memory</span> signers <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">address</span>[](sigCount);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 验证每个签名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">uint256</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sigCount; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> sig <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">bytes</span>(<span style="color:#ae81ff">65</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">uint256</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">65</span>; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                sig[j] <span style="color:#f92672">=</span> signature[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">65</span> <span style="color:#f92672">+</span> j];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">address</span> signer <span style="color:#f92672">=</span> hash.recover(sig);
+</span></span><span style="display:flex;"><span>            require(_isOwner(signer), <span style="color:#e6db74">&#34;Invalid signer&#34;</span>);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 检查重复签名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">uint256</span> k <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; k <span style="color:#f92672">&lt;</span> i; k<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>                require(signers[k] <span style="color:#f92672">!=</span> signer, <span style="color:#e6db74">&#34;Duplicate signature&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            signers[i] <span style="color:#f92672">=</span> signer;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> MAGICVALUE;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">_isOwner</span>(<span style="color:#66d9ef">address</span> addr) <span style="color:#66d9ef">internal</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">uint256</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> owners.length; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (owners[i] <span style="color:#f92672">==</span> addr) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="通用签名验证器">
+  通用签名验证器
+  <a class="heading-link" href="#%e9%80%9a%e7%94%a8%e7%ad%be%e5%90%8d%e9%aa%8c%e8%af%81%e5%99%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;@openzeppelin/contracts/utils/cryptography/ECDSA.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">UniversalSignatureValidator</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">using</span> ECDSA <span style="color:#66d9ef">for</span> <span style="color:#66d9ef">bytes32</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bytes4</span> <span style="color:#66d9ef">constant</span> <span style="color:#66d9ef">internal</span> MAGICVALUE <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x1626ba7e</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 通用签名验证函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param signer 签名者地址（可能是 EOA 或合约）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param hash 要验证的哈希
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param signature 签名数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isValidSignature</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> signer,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> hash,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 检查是否为合约地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (signer.code.length <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 合约签名：调用 EIP-1271
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">try</span> IERC1271(signer).isValidSignature(hash, signature) <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bytes4</span> result) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> result <span style="color:#f92672">==</span> MAGICVALUE;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">catch</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// EOA 签名：使用 ecrecover
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">address</span> recovered <span style="color:#f92672">=</span> hash.recover(signature);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> recovered <span style="color:#f92672">==</span> signer;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="与-eip-712-结合使用">
+  与 EIP-712 结合使用
+  <a class="heading-link" href="#%e4%b8%8e-eip-712-%e7%bb%93%e5%90%88%e4%bd%bf%e7%94%a8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> <span style="color:#e6db74">&#34;@openzeppelin/contracts/utils/cryptography/EIP712.sol&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">OrderValidator</span> <span style="color:#66d9ef">is</span> EIP712 {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Order</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> maker;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> taker;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint256</span> amount;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint256</span> deadline;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bytes32</span> <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">constant</span> ORDER_TYPEHASH <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>        keccak256(<span style="color:#e6db74">&#34;Order(address maker,address taker,uint256 amount,uint256 deadline)&#34;</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>() EIP712(<span style="color:#e6db74">&#34;OrderValidator&#34;</span>, <span style="color:#e6db74">&#34;1&#34;</span>) {}
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validateOrder</span>(
+</span></span><span style="display:flex;"><span>        Order <span style="color:#66d9ef">memory</span> order,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> signature
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">bool</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> structHash <span style="color:#f92672">=</span> keccak256(
+</span></span><span style="display:flex;"><span>            abi.encode(ORDER_TYPEHASH, order.maker, order.taker, order.amount, order.deadline)
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes32</span> hash <span style="color:#f92672">=</span> _hashTypedDataV4(structHash);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用通用验证器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        UniversalSignatureValidator validator <span style="color:#f92672">=</span> UniversalSignatureValidator(<span style="color:#ae81ff">0</span>x...);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> validator.isValidSignature(order.maker, hash, signature);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="应用场景">
+  应用场景
+  <a class="heading-link" href="#%e5%ba%94%e7%94%a8%e5%9c%ba%e6%99%af">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>多签钱包</strong></p>
+<ul>
+<li>需要多个所有者签名才能执行操作</li>
+<li>支持阈值签名（如 3/5 多签）</li>
+</ul>
+</li>
+<li>
+<p><strong>智能合约钱包</strong></p>
+<ul>
+<li>基于规则的签名验证</li>
+<li>社交恢复、时间锁等高级功能</li>
+</ul>
+</li>
+<li>
+<p><strong>DAO 治理</strong></p>
+<ul>
+<li>验证提案的&quot;组织签名&quot;</li>
+<li>支持委托投票等复杂场景</li>
+</ul>
+</li>
+<li>
+<p><strong>DeFi 协议集成</strong></p>
+<ul>
+<li>让智能合约钱包能够使用 permit 功能</li>
+<li>支持复杂的 DeFi 操作授权</li>
+</ul>
+</li>
+</ol>
+<h3 id="与其他-eip-的关系">
+  与其他 EIP 的关系
+  <a class="heading-link" href="#%e4%b8%8e%e5%85%b6%e4%bb%96-eip-%e7%9a%84%e5%85%b3%e7%b3%bb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>EIP-712 + EIP-1271</strong>：让智能合约能够签署和验证结构化数据</li>
+<li><strong>ERC-2612 + EIP-1271</strong>：让智能合约钱包也能使用 permit 功能</li>
+<li><strong>EIP-4494 + EIP-1271</strong>：智能合约钱包的 NFT permit 支持</li>
+</ul>
+<h3 id="安全注意事项">
+  安全注意事项
+  <a class="heading-link" href="#%e5%ae%89%e5%85%a8%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>重放攻击防护</strong>：结合 nonce、chainId、deadline 等机制</li>
+<li><strong>签名唯一性</strong>：防止同一签名被多次使用</li>
+<li><strong>权限验证</strong>：确保只有授权的签名者能够通过验证</li>
+<li><strong>合约升级</strong>：考虑签名验证逻辑的升级兼容性</li>
+</ul>
+<h3 id="小结">
+  小结
+  <a class="heading-link" href="#%e5%b0%8f%e7%bb%93">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>EIP-1271 为智能合约提供了标准的签名验证接口</li>
+<li>支持多签、阈值签名等复杂的验证逻辑</li>
+<li>与 EIP-712 结合，实现结构化数据的合约签名</li>
+<li>是智能合约钱包和 DeFi 生态的重要基础设施</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-eip系列">
+        See also in EIP系列
+        <a class="heading-link" href="#see-also-in-eip%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+        
+          
+            <li>
+              <a href="/posts/eip4494/">深入 EIP-4494</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip7702/">深入 EIP-7720</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip1559/">深入 EIP-1559</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip2612/">深入ERC2612</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip712/">深入 EIP-712</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

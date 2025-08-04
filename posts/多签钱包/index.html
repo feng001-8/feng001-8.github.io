@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入多签钱包 · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入多签钱包">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入多签钱包">
+  <meta name="twitter:description" content="深入多签钱包">
+
+<meta property="og:url" content="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入多签钱包">
+  <meta property="og:description" content="深入多签钱包">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="Wallet">
+    <meta property="article:tag" content="ETH">
+      <meta property="og:see_also" content="http://localhost:1313/posts/aa%E9%92%B1%E5%8C%85/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip3074/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-contract/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eoa/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/mpc/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+              深入多签钱包
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-01T00:00:00Z">
+                August 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              5-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Wallet/">Wallet</a>
+      <span class="separator">•</span>
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/eth/">ETH</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/wallet/">Wallet</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="多签钱包">
+  多签钱包
+  <a class="heading-link" href="#%e5%a4%9a%e7%ad%be%e9%92%b1%e5%8c%85">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="多签钱包解决的核心问题资产安全与风险分散">
+  多签钱包解决的核心问题：资产安全与风险分散
+  <a class="heading-link" href="#%e5%a4%9a%e7%ad%be%e9%92%b1%e5%8c%85%e8%a7%a3%e5%86%b3%e7%9a%84%e6%a0%b8%e5%bf%83%e9%97%ae%e9%a2%98%e8%b5%84%e4%ba%a7%e5%ae%89%e5%85%a8%e4%b8%8e%e9%a3%8e%e9%99%a9%e5%88%86%e6%95%a3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>在传统的 EOA 钱包中，单一私钥控制所有资产，存在以下风险：</p>
+<ul>
+<li><strong>私钥丢失</strong>：一旦私钥丢失，资产永久无法找回</li>
+<li><strong>私钥泄露</strong>：私钥被盗，资产立即面临风险</li>
+<li><strong>单点故障</strong>：没有备份机制，容错性极低</li>
+<li><strong>权限过度集中</strong>：一个人掌控所有决策权</li>
+</ul>
+<p>多签钱包通过以下机制解决这些问题：</p>
+<ol>
+<li><strong>M/N 多重签名</strong>：需要 N 个签名者中的 M 个同意才能执行交易</li>
+<li><strong>风险分散</strong>：将控制权分散到多个参与者</li>
+<li><strong>容错机制</strong>：部分私钥丢失不影响钱包使用</li>
+<li><strong>治理机制</strong>：重要决策需要多方共识</li>
+</ol>
+<h3 id="多签钱包的通用架构">
+  多签钱包的通用架构
+  <a class="heading-link" href="#%e5%a4%9a%e7%ad%be%e9%92%b1%e5%8c%85%e7%9a%84%e9%80%9a%e7%94%a8%e6%9e%b6%e6%9e%84">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<pre tabindex="0"><code>多签钱包 = 智能合约 + 多个所有者 + 签名阈值
+</code></pre><p><strong>核心组件</strong>：</p>
+<ul>
+<li><strong>所有者列表（Owners）</strong>：有权签名的地址集合</li>
+<li><strong>签名阈值（Threshold）</strong>：执行交易所需的最少签名数</li>
+<li><strong>交易队列（Transaction Queue）</strong>：待执行的交易列表</li>
+<li><strong>确认机制（Confirmation）</strong>：所有者对交易的签名确认</li>
+</ul>
+<p><strong>工作流程</strong>：</p>
+<pre tabindex="0"><code>提交交易 → 收集签名 → 达到阈值 → 执行交易
+</code></pre><h3 id="多重签名架构">
+  多重签名架构
+  <a class="heading-link" href="#%e5%a4%9a%e9%87%8d%e7%ad%be%e5%90%8d%e6%9e%b6%e6%9e%84">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>单一私钥风险高，丢失即资产全失</p>
+</li>
+<li>
+<p>多重签名方案：需要 M 个签名中的 N 个才能执行交易（M/N 多签）</p>
+</li>
+<li>
+<p>Gnosis Safe：最流行的多签钱包标准，支持 1/1 到 N/N 任意组合</p>
+</li>
+<li>
+<p>社交恢复：通过朋友/家人帮助恢复钱包访问权限</p>
+</li>
+</ul>
+<h3 id="智能合约钱包实现">
+  智能合约钱包实现
+  <a class="heading-link" href="#%e6%99%ba%e8%83%bd%e5%90%88%e7%ba%a6%e9%92%b1%e5%8c%85%e5%ae%9e%e7%8e%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>智能合约钱包通过代码逻辑控制资产，提供比 EOA 更强大的功能</p>
+</li>
+<li>
+<p>核心原理：使用 <code>call</code> 函数执行任意交易，实现可编程的资产管理</p>
+</li>
+</ul>
+<p><strong>基础合约钱包实现</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @title ContractWallet - 智能合约钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @dev 一个简单的智能合约钱包实现，支持接收资金和执行任意交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">ContractWallet</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 事件定义 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 存款事件 - 当合约接收到资金时触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Deposit</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> sender, <span style="color:#66d9ef">uint</span> amount, <span style="color:#66d9ef">uint</span> balance);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 执行交易事件 - 当合约执行外部交易时触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">ExecuteTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> data
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 状态变量 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 钱包所有者地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">public</span> owner;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 修饰符 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 只有所有者可以调用的修饰符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">onlyOwner</span>() {
+</span></span><span style="display:flex;"><span>        require(owner <span style="color:#f92672">==</span> msg.sender, <span style="color:#e6db74">&#34;not owner&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 构造函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 构造函数 - 部署时设置钱包所有者
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">address</span> _owner) {
+</span></span><span style="display:flex;"><span>        owner <span style="color:#f92672">=</span> _owner;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 接收函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev receive 函数 - 接收 ETH 转账
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    receive() <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">payable</span> {
+</span></span><span style="display:flex;"><span>        emit Deposit(msg.sender, msg.value, <span style="color:#66d9ef">address</span>(this).balance);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 核心功能函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 执行任意交易 - 智能合约钱包的核心功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _to 目标地址（可以是 EOA 地址或合约地址）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _value 要发送的 ETH 数量（单位：wei）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _data 调用数据（ABI 编码的函数调用数据）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">executeTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> _to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> _value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> _data
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">public</span> onlyOwner {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用 call 执行低级调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        (<span style="color:#66d9ef">bool</span> success, ) <span style="color:#f92672">=</span> _to.call{value<span style="color:#f92672">:</span> _value}(_data);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 检查调用是否成功
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        require(success, <span style="color:#e6db74">&#34;tx failed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 触发执行交易事件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        emit ExecuteTransaction(_to, _value, _data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>多重签名钱包实现</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @title MultiSigWallet - 多重签名钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @dev 需要多个所有者签名才能执行交易的智能合约钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">MultiSigWallet</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 事件定义 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Deposit</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> sender, <span style="color:#66d9ef">uint</span> amount, <span style="color:#66d9ef">uint</span> balance);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">SubmitTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">indexed</span> txIndex,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> data
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">ConfirmTransaction</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">indexed</span> txIndex);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">RevokeConfirmation</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">indexed</span> txIndex);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">ExecuteTransaction</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> owner, <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">indexed</span> txIndex);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 状态变量 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">public</span> owners;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">bool</span>) <span style="color:#66d9ef">public</span> isOwner;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">uint</span> <span style="color:#66d9ef">public</span> numConfirmationsRequired;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Transaction</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> to;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> value;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> data;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> executed;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> numConfirmations;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">uint</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">mapping</span>(<span style="color:#66d9ef">address</span> <span style="color:#f92672">=&gt;</span> <span style="color:#66d9ef">bool</span>)) <span style="color:#66d9ef">public</span> isConfirmed;
+</span></span><span style="display:flex;"><span>    Transaction[] <span style="color:#66d9ef">public</span> transactions;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 修饰符 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">onlyOwner</span>() {
+</span></span><span style="display:flex;"><span>        require(isOwner[msg.sender], <span style="color:#e6db74">&#34;not owner&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">txExists</span>(<span style="color:#66d9ef">uint</span> _txIndex) {
+</span></span><span style="display:flex;"><span>        require(_txIndex <span style="color:#f92672">&lt;</span> transactions.length, <span style="color:#e6db74">&#34;tx does not exist&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">notExecuted</span>(<span style="color:#66d9ef">uint</span> _txIndex) {
+</span></span><span style="display:flex;"><span>        require(<span style="color:#f92672">!</span>transactions[_txIndex].executed, <span style="color:#e6db74">&#34;tx already executed&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">notConfirmed</span>(<span style="color:#66d9ef">uint</span> _txIndex) {
+</span></span><span style="display:flex;"><span>        require(<span style="color:#f92672">!</span>isConfirmed[_txIndex][msg.sender], <span style="color:#e6db74">&#34;tx already confirmed&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 构造函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">memory</span> _owners, <span style="color:#66d9ef">uint</span> _numConfirmationsRequired) {
+</span></span><span style="display:flex;"><span>        require(_owners.length <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#34;owners required&#34;</span>);
+</span></span><span style="display:flex;"><span>        require(
+</span></span><span style="display:flex;"><span>            _numConfirmationsRequired <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                _numConfirmationsRequired <span style="color:#f92672">&lt;=</span> _owners.length,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;invalid number of required confirmations&#34;</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">uint</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> _owners.length; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">address</span> owner <span style="color:#f92672">=</span> _owners[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            require(owner <span style="color:#f92672">!=</span> <span style="color:#66d9ef">address</span>(<span style="color:#ae81ff">0</span>), <span style="color:#e6db74">&#34;invalid owner&#34;</span>);
+</span></span><span style="display:flex;"><span>            require(<span style="color:#f92672">!</span>isOwner[owner], <span style="color:#e6db74">&#34;owner not unique&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            isOwner[owner] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>            owners.push(owner);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        numConfirmationsRequired <span style="color:#f92672">=</span> _numConfirmationsRequired;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 核心功能函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    receive() <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">payable</span> {
+</span></span><span style="display:flex;"><span>        emit Deposit(msg.sender, msg.value, <span style="color:#66d9ef">address</span>(this).balance);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">submitTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> _to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> _value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> _data
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">public</span> onlyOwner {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> txIndex <span style="color:#f92672">=</span> transactions.length;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        transactions.push(
+</span></span><span style="display:flex;"><span>            Transaction({
+</span></span><span style="display:flex;"><span>                to<span style="color:#f92672">:</span> _to,
+</span></span><span style="display:flex;"><span>                value<span style="color:#f92672">:</span> _value,
+</span></span><span style="display:flex;"><span>                data<span style="color:#f92672">:</span> _data,
+</span></span><span style="display:flex;"><span>                executed<span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>,
+</span></span><span style="display:flex;"><span>                numConfirmations<span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        emit SubmitTransaction(msg.sender, txIndex, _to, _value, _data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">confirmTransaction</span>(<span style="color:#66d9ef">uint</span> _txIndex)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span>
+</span></span><span style="display:flex;"><span>        onlyOwner
+</span></span><span style="display:flex;"><span>        txExists(_txIndex)
+</span></span><span style="display:flex;"><span>        notExecuted(_txIndex)
+</span></span><span style="display:flex;"><span>        notConfirmed(_txIndex)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Transaction <span style="color:#66d9ef">storage</span> transaction <span style="color:#f92672">=</span> transactions[_txIndex];
+</span></span><span style="display:flex;"><span>        transaction.numConfirmations <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        isConfirmed[_txIndex][msg.sender] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        emit ConfirmTransaction(msg.sender, _txIndex);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">executeTransaction</span>(<span style="color:#66d9ef">uint</span> _txIndex)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span>
+</span></span><span style="display:flex;"><span>        onlyOwner
+</span></span><span style="display:flex;"><span>        txExists(_txIndex)
+</span></span><span style="display:flex;"><span>        notExecuted(_txIndex)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Transaction <span style="color:#66d9ef">storage</span> transaction <span style="color:#f92672">=</span> transactions[_txIndex];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        require(
+</span></span><span style="display:flex;"><span>            transaction.numConfirmations <span style="color:#f92672">&gt;=</span> numConfirmationsRequired,
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;cannot execute tx&#34;</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        transaction.executed <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        (<span style="color:#66d9ef">bool</span> success, ) <span style="color:#f92672">=</span> transaction.to.call{value<span style="color:#f92672">:</span> transaction.value}(
+</span></span><span style="display:flex;"><span>            transaction.data
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        require(success, <span style="color:#e6db74">&#34;tx failed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        emit ExecuteTransaction(msg.sender, _txIndex);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">revokeConfirmation</span>(<span style="color:#66d9ef">uint</span> _txIndex)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span>
+</span></span><span style="display:flex;"><span>        onlyOwner
+</span></span><span style="display:flex;"><span>        txExists(_txIndex)
+</span></span><span style="display:flex;"><span>        notExecuted(_txIndex)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Transaction <span style="color:#66d9ef">storage</span> transaction <span style="color:#f92672">=</span> transactions[_txIndex];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        require(isConfirmed[_txIndex][msg.sender], <span style="color:#e6db74">&#34;tx not confirmed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        transaction.numConfirmations <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        isConfirmed[_txIndex][msg.sender] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        emit RevokeConfirmation(msg.sender, _txIndex);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getOwners</span>() <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">address</span>[] <span style="color:#66d9ef">memory</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> owners;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTransactionCount</span>() <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">view</span> <span style="color:#66d9ef">returns</span> (<span style="color:#66d9ef">uint</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> transactions.length;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTransaction</span>(<span style="color:#66d9ef">uint</span> _txIndex)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">public</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">view</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">returns</span> (
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">address</span> to,
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint</span> value,
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> data,
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">bool</span> executed,
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">uint</span> numConfirmations
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Transaction <span style="color:#66d9ef">storage</span> transaction <span style="color:#f92672">=</span> transactions[_txIndex];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>            transaction.to,
+</span></span><span style="display:flex;"><span>            transaction.value,
+</span></span><span style="display:flex;"><span>            transaction.data,
+</span></span><span style="display:flex;"><span>            transaction.executed,
+</span></span><span style="display:flex;"><span>            transaction.numConfirmations
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>使用示例</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> { <span style="color:#a6e22e">ethers</span> } <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#34;ethers&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deployAndUseMultiSig</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">provider</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">providers</span>.<span style="color:#a6e22e">JsonRpcProvider</span>(<span style="color:#e6db74">&#34;http://localhost:8545&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> [<span style="color:#a6e22e">owner1</span>, <span style="color:#a6e22e">owner2</span>, <span style="color:#a6e22e">owner3</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">provider</span>.<span style="color:#a6e22e">listAccounts</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 1. 部署多签钱包（3个所有者，需要2个签名）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">MultiSigWallet</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">getContractFactory</span>(<span style="color:#e6db74">&#34;MultiSigWallet&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">multiSig</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">MultiSigWallet</span>.<span style="color:#a6e22e">deploy</span>(
+</span></span><span style="display:flex;"><span>        [<span style="color:#a6e22e">owner1</span>, <span style="color:#a6e22e">owner2</span>, <span style="color:#a6e22e">owner3</span>], <span style="color:#75715e">// 所有者列表
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#ae81ff">2</span> <span style="color:#75715e">// 需要2个签名
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    );
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;多签钱包地址:&#34;</span>, <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">address</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 2. 向钱包存入资金
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">owner1</span>.<span style="color:#a6e22e">sendTransaction</span>({
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">to</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">address</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">parseEther</span>(<span style="color:#e6db74">&#34;1.0&#34;</span>)
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 3. 提交交易（转账0.5 ETH）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">tx</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">owner1</span>).<span style="color:#a6e22e">submitTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6&#34;</span>, <span style="color:#75715e">// 接收地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">parseEther</span>(<span style="color:#e6db74">&#34;0.5&#34;</span>), <span style="color:#75715e">// 金额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#e6db74">&#34;0x&#34;</span> <span style="color:#75715e">// 数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    );
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">receipt</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">tx</span>.<span style="color:#a6e22e">wait</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">txIndex</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// 第一笔交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 4. 第二个所有者确认交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">owner2</span>).<span style="color:#a6e22e">confirmTransaction</span>(<span style="color:#a6e22e">txIndex</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 5. 执行交易（已有2个确认）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">connect</span>(<span style="color:#a6e22e">owner1</span>).<span style="color:#a6e22e">executeTransaction</span>(<span style="color:#a6e22e">txIndex</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;多签交易执行成功&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 使用 ERC20 代币转账示例
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">multiSigERC20Transfer</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">erc20</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">Contract</span>(<span style="color:#a6e22e">tokenAddress</span>, <span style="color:#a6e22e">erc20ABI</span>, <span style="color:#a6e22e">provider</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 编码 transfer 函数调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">transferData</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">erc20</span>.<span style="color:#66d9ef">interface</span>.<span style="color:#a6e22e">encodeFunctionData</span>(<span style="color:#e6db74">&#34;transfer&#34;</span>, [
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">recipientAddress</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ethers</span>.<span style="color:#a6e22e">utils</span>.<span style="color:#a6e22e">parseUnits</span>(<span style="color:#e6db74">&#34;100&#34;</span>, <span style="color:#ae81ff">18</span>) <span style="color:#75715e">// 100 tokens
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// 提交到多签钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">multiSig</span>.<span style="color:#a6e22e">submitTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">tokenAddress</span>, <span style="color:#75715e">// ERC20 合约地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#ae81ff">0</span>, <span style="color:#75715e">// 不发送 ETH
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">transferData</span> <span style="color:#75715e">// 调用数据
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="账户抽象account-abstraction">
+  账户抽象（Account Abstraction）
+  <a class="heading-link" href="#%e8%b4%a6%e6%88%b7%e6%8a%bd%e8%b1%a1account-abstraction">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>EIP-4337：统一 EOA 和 CA 的用户体验，让智能合约钱包像 EOA 一样易用</p>
+</li>
+<li>
+<p>EIP-7702：临时将 EOA 转换为智能合约账户，享受 CA 的高级功能</p>
+</li>
+<li>
+<p>Paymaster：第三方代付 Gas 费，实现真正的 gasless 体验</p>
+</li>
+<li>
+<p>Bundler：批量处理用户操作，提高网络效率</p>
+</li>
+</ul>
+<h3 id="小结">
+  小结
+  <a class="heading-link" href="#%e5%b0%8f%e7%bb%93">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>CA 账户通过智能合约代码控制资产，提供比 EOA 更强大和灵活的功能</li>
+<li>多重签名、社交恢复等机制大大提升了资产安全性</li>
+<li>Account Abstraction 正在统一 EOA 和 CA 的用户体验</li>
+<li>智能合约钱包是 Web3 用户体验升级的重要方向</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-wallet系列">
+        See also in Wallet系列
+        <a class="heading-link" href="#see-also-in-wallet%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/aa%E9%92%B1%E5%8C%85/">深入AA钱包</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip3074/">深入EIP3074</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/wallet-contract/">深入contract-wallet</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eoa/">深入EOA</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/mpc/">深入MPC</a>
+            </li>
+          
+        
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

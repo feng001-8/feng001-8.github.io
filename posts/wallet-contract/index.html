@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入contract-wallet · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入contract-wallet">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入contract-wallet">
+  <meta name="twitter:description" content="深入contract-wallet">
+
+<meta property="og:url" content="http://localhost:1313/posts/wallet-contract/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入contract-wallet">
+  <meta property="og:description" content="深入contract-wallet">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="Wallet">
+    <meta property="article:tag" content="ETH">
+      <meta property="og:see_also" content="http://localhost:1313/posts/aa%E9%92%B1%E5%8C%85/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip3074/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eoa/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/mpc/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/wallet-contract/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/wallet-contract/">
+              深入contract-wallet
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-01T00:00:00Z">
+                August 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              2-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Wallet/">Wallet</a>
+      <span class="separator">•</span>
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/eth/">ETH</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/wallet/">Wallet</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h3 id="contract-wallet">
+  contract-wallet
+  <a class="heading-link" href="#contract-wallet">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>外部账户(EOA)与 合约账户在 EVM 层面是等效的,都是有:nonce(交</li>
+</ul>
+<p>易序号)、balance(余额)、storageRoot(状态)、codeHash(代码)</p>
+<ul>
+<li>如果该合约可以持有资金、调用任意合约方法,就是一个智能合约钱包账</li>
+</ul>
+<p>户</p>
+<ul>
+<li>
+<p>智能合约钱包账户:支持多签、multicall、密钥替换、找回</p>
+</li>
+<li>
+<p>AA(ERC4337 / ERC7702): 抽象掉 EOA 与 智能合约钱包账户的区别</p>
+</li>
+</ul>
+<h3 id="example">
+  example
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-solidity" data-lang="solidity"><span style="display:flex;"><span><span style="color:#75715e">// SPDX-License-Identifier: MIT
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">pragma solidity</span> <span style="color:#f92672">^</span><span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">8</span>.<span style="color:#ae81ff">20</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @title ContractWallet - 智能合约钱包
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * @dev 一个简单的智能合约钱包实现，支持接收资金和执行任意交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">contract</span> <span style="color:#a6e22e">ContractWallet</span> {
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 事件定义 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 存款事件 - 当合约接收到资金时触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param sender 发送者地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param amount 存款金额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param balance 存款后合约的总余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">Deposit</span>(<span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> sender, <span style="color:#66d9ef">uint</span> amount, <span style="color:#66d9ef">uint</span> balance);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 执行交易事件 - 当合约执行外部交易时触发
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param to 目标合约/地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param value 发送的 ETH 数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param data 调用数据（函数调用的编码数据）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">event</span> <span style="color:#a6e22e">ExecuteTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">indexed</span> to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> data
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 状态变量 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 钱包所有者地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 只有所有者可以执行交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">address</span> <span style="color:#66d9ef">public</span> owner;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 修饰符 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 只有所有者可以调用的修饰符
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 用于保护关键函数，确保只有钱包所有者能执行操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">modifier</span> <span style="color:#a6e22e">onlyOwner</span>() {
+</span></span><span style="display:flex;"><span>        require(owner <span style="color:#f92672">==</span> msg.sender, <span style="color:#e6db74">&#34;not owner&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">_</span>; <span style="color:#75715e">// 继续执行被修饰的函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 构造函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 构造函数 - 部署时设置钱包所有者
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _owner 钱包所有者地址
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">constructor</span>(<span style="color:#66d9ef">address</span> _owner) {
+</span></span><span style="display:flex;"><span>        owner <span style="color:#f92672">=</span> _owner;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 接收函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev receive 函数 - 接收 ETH 转账
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 当有人直接向合约地址转账时自动调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * external: 只能从外部调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * payable: 可以接收 ETH
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    receive() <span style="color:#66d9ef">external</span> <span style="color:#66d9ef">payable</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 触发存款事件，记录发送者、金额和合约余额
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        emit Deposit(msg.sender, msg.value, <span style="color:#66d9ef">address</span>(this).balance);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// ============ 核心功能函数 ============
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @dev 执行任意交易 - 智能合约钱包的核心功能
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _to 目标地址（可以是 EOA 地址或合约地址）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _value 要发送的 ETH 数量（单位：wei）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param _data 调用数据（ABI 编码的函数调用数据）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 使用场景：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 1. 转账 ETH：_to=接收地址, _value=金额, _data=&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 2. 调用合约：_to=合约地址, _value=0, _data=函数调用编码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 3. 部署合约：_to=0x0, _value=0, _data=合约字节码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">executeTransaction</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">address</span> _to,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">uint</span> _value,
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bytes</span> <span style="color:#66d9ef">memory</span> _data
+</span></span><span style="display:flex;"><span>    ) <span style="color:#66d9ef">public</span> onlyOwner {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 使用 call 执行低级调用
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// {value: _value} 指定发送的 ETH 数量
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// _data 是要执行的数据（函数调用或合约创建）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        (<span style="color:#66d9ef">bool</span> success, ) <span style="color:#f92672">=</span> _to.call{value<span style="color:#f92672">:</span> _value}(_data);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 检查调用是否成功，失败则回滚交易
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        require(success, <span style="color:#e6db74">&#34;tx failed&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 触发执行交易事件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        emit ExecuteTransaction(_to, _value, _data);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-wallet系列">
+        See also in Wallet系列
+        <a class="heading-link" href="#see-also-in-wallet%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/aa%E9%92%B1%E5%8C%85/">深入AA钱包</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip3074/">深入EIP3074</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="/posts/eoa/">深入EOA</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/mpc/">深入MPC</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">深入多签钱包</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

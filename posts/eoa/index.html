@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  深入EOA · feng001-Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="feng">
+<meta name="description" content="深入EOA">
+<meta name="keywords" content="Blog,Web3 developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="深入EOA">
+  <meta name="twitter:description" content="深入EOA">
+
+<meta property="og:url" content="http://localhost:1313/posts/eoa/">
+  <meta property="og:site_name" content="feng001-Blog">
+  <meta property="og:title" content="深入EOA">
+  <meta property="og:description" content="深入EOA">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-08-01T00:00:00+00:00">
+    <meta property="article:tag" content="Wallet">
+    <meta property="article:tag" content="ETH">
+      <meta property="og:see_also" content="http://localhost:1313/posts/aa%E9%92%B1%E5%8C%85/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/eip3074/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/wallet-contract/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/mpc/">
+      <meta property="og:see_also" content="http://localhost:1313/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/eoa/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      feng001-Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">About</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/search/">Search</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/categories/">Categories</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contact me</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/zh-cn/">中文</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/eoa/">
+              深入EOA
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-08-01T00:00:00Z">
+                August 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              3-minute read
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/feng/">feng</a></div>
+
+          <div class="categories">
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/Wallet/">Wallet</a>
+      <span class="separator">•</span>
+    <i class="fa-solid fa-folder" aria-hidden="true"></i>
+      <a href="http://localhost:1313/categories/eth/">ETH</a></div>
+
+          <div class="tags">
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/wallet/">Wallet</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <i class="fa-solid fa-tag" aria-hidden="true"></i>
+      <a href="/tags/eth/">ETH</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="eoa">
+  EOA
+  <a class="heading-link" href="#eoa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="eoa钱包核心功能">
+  (EOA)钱包核心功能
+  <a class="heading-link" href="#eoa%e9%92%b1%e5%8c%85%e6%a0%b8%e5%bf%83%e5%8a%9f%e8%83%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>账户管理:</strong> 创建账号、导入导出
+<ul>
+<li><strong>私钥、助记词、Keystore、MPC</strong></li>
+</ul>
+</li>
+<li><strong>构造交易、签名、发送交易</strong></li>
+<li>其他:展示资产价值、交易记录、钱包浏览器、资产交易等</li>
+</ul>
+<h3 id="eoa-账号创建">
+  EOA 账号创建
+  <a class="heading-link" href="#eoa-%e8%b4%a6%e5%8f%b7%e5%88%9b%e5%bb%ba">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>本质是一个 32 字节的私钥(随机数)</li>
+</ul>
+<p><img src="/images/EOA.png" alt=""></p>
+<p>• 找到一个安全的熵源(不可预测、不可重复)作为私钥,如掷硬币256次。</p>
+<p>• 使用 secp256k1椭圆曲线算法计算出公钥</p>
+<p>• secp256k1 : 比特币和以太坊</p>
+<p>• Secp256r1: Passkey SSH</p>
+<p>• Ed25519 : Solana</p>
+<p>• 对公钥进行keccak256 hash运算再取后40位得到</p>
+<h3 id="分层确定性推倒">
+  分层确定性推倒
+  <a class="heading-link" href="#%e5%88%86%e5%b1%82%e7%a1%ae%e5%ae%9a%e6%80%a7%e6%8e%a8%e5%80%92">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>随机生成的私钥,备份麻烦,不易管理</p>
+</li>
+<li>
+<p>BIP32 提案(HD钱包):由同一个种子,就可以生成无数个私钥</p>
+</li>
+</ul>
+<p>和地址</p>
+<ul>
+<li>
+<p>BIP44 提案: 给bip32的路径赋予意义来支持做多币种、多地址</p>
+</li>
+<li>
+<p>BIP39: 使用助记词的方式,生成种子</p>
+</li>
+</ul>
+<h3 id="keystore-加密私钥">
+  KEYSTORE 加密私钥
+  <a class="heading-link" href="#keystore-%e5%8a%a0%e5%af%86%e7%a7%81%e9%92%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>Keystore 文件就是一种以加密的方式存储密钥的文件(加强安全性),签名前先解析出私钥。</p>
+</li>
+<li>
+<p>原理: 使用 scrypt 算法从密码派生加密密钥, 用加密密钥使用 AES-128-CTR 算法加密私钥。</p>
+</li>
+</ul>
+<p><strong>Keystore 生成及校验</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">crypto</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;crypto&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">fs</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;fs/promises&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">path</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;path&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">KeystoreUtils</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 加密私钥并生成 KeyStore 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {string} privateKey - 私钥（带0x前缀）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {string} password - 密码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @returns {Object} KeyStore 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">encryptPrivateKey</span>(<span style="color:#a6e22e">privateKey</span>, <span style="color:#a6e22e">password</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. 生成随机 salt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">salt</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">32</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 2. 使用 scrypt 派生密钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">derivedKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">scryptSync</span>(<span style="color:#a6e22e">password</span>, <span style="color:#a6e22e">salt</span>, <span style="color:#ae81ff">32</span>, {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">N</span>: <span style="color:#66d9ef">8192</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">r</span>: <span style="color:#66d9ef">8</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">p</span>: <span style="color:#66d9ef">1</span>
+</span></span><span style="display:flex;"><span>            })
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 3. 生成 IV
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">iv</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">randomBytes</span>(<span style="color:#ae81ff">16</span>)
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 4. 加密私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#75715e">// 使用派生密钥的前16字节作为AES-128的密钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">cipher</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createCipheriv</span>(<span style="color:#e6db74">&#39;aes-128-ctr&#39;</span>, <span style="color:#a6e22e">derivedKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">16</span>), <span style="color:#a6e22e">iv</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">privateKeyBuffer</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#66d9ef">from</span>(<span style="color:#a6e22e">privateKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">2</span>), <span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ciphertext</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">cipher</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">privateKeyBuffer</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">cipher</span>.<span style="color:#a6e22e">final</span>()
+</span></span><span style="display:flex;"><span>            ])
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 5. 计算 MAC
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">mac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHash</span>(<span style="color:#e6db74">&#39;sha3-256&#39;</span>)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">derivedKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>), <span style="color:#a6e22e">ciphertext</span>]))
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">digest</span>()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 6. 返回 KeyStore 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">crypto</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">cipher</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;aes-128-ctr&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">cipherparams</span><span style="color:#f92672">:</span> { <span style="color:#a6e22e">iv</span>: <span style="color:#66d9ef">iv.toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>) },
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">ciphertext</span>: <span style="color:#66d9ef">ciphertext.toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>),
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">kdf</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;scrypt&#39;</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">kdfparams</span><span style="color:#f92672">:</span> {
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">dklen</span>: <span style="color:#66d9ef">32</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">n</span>: <span style="color:#66d9ef">8192</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">p</span>: <span style="color:#66d9ef">1</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">r</span>: <span style="color:#66d9ef">8</span>,
+</span></span><span style="display:flex;"><span>                        <span style="color:#a6e22e">salt</span>: <span style="color:#66d9ef">salt.toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>                    },
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">mac</span>: <span style="color:#66d9ef">mac.toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>                },
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">id</span>: <span style="color:#66d9ef">crypto.randomUUID</span>(),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">version</span>: <span style="color:#66d9ef">3</span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;加密私钥失败:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 从 KeyStore 文件解密私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {Object} keystore - KeyStore 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {string} password - 密码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @returns {string} 解密后的私钥（带0x前缀）
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">decryptPrivateKey</span>(<span style="color:#a6e22e">keystore</span>, <span style="color:#a6e22e">password</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">crypto</span>: <span style="color:#66d9ef">cryptoData</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">keystore</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 1. 从 KeyStore 获取参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">kdfparams</span>, <span style="color:#a6e22e">cipherparams</span>, <span style="color:#a6e22e">ciphertext</span>, <span style="color:#a6e22e">mac</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">cryptoData</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">salt</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">kdfparams</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">iv</span> } <span style="color:#f92672">=</span> <span style="color:#a6e22e">cipherparams</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 2. 使用 scrypt 派生密钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">derivedKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">scryptSync</span>(
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">password</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">Buffer</span>.<span style="color:#66d9ef">from</span>(<span style="color:#a6e22e">salt</span>, <span style="color:#e6db74">&#39;hex&#39;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">kdfparams</span>.<span style="color:#a6e22e">dklen</span>,
+</span></span><span style="display:flex;"><span>                {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">N</span>: <span style="color:#66d9ef">kdfparams.n</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">r</span>: <span style="color:#66d9ef">kdfparams.r</span>,
+</span></span><span style="display:flex;"><span>                    <span style="color:#a6e22e">p</span>: <span style="color:#66d9ef">kdfparams.p</span>
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 3. 验证 MAC
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">calculatedMac</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createHash</span>(<span style="color:#e6db74">&#39;sha3-256&#39;</span>)
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([<span style="color:#a6e22e">derivedKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">16</span>, <span style="color:#ae81ff">32</span>), <span style="color:#a6e22e">Buffer</span>.<span style="color:#66d9ef">from</span>(<span style="color:#a6e22e">ciphertext</span>, <span style="color:#e6db74">&#39;hex&#39;</span>)]))
+</span></span><span style="display:flex;"><span>                .<span style="color:#a6e22e">digest</span>()
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">calculatedMac</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>) <span style="color:#f92672">!==</span> <span style="color:#a6e22e">mac</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;密码错误或 KeyStore 文件已损坏&#39;</span>)
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 4. 解密私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decipher</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">crypto</span>.<span style="color:#a6e22e">createDecipheriv</span>(
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;aes-128-ctr&#39;</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">derivedKey</span>.<span style="color:#a6e22e">slice</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">16</span>),  <span style="color:#75715e">// 使用派生密钥的前16字节
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#a6e22e">Buffer</span>.<span style="color:#66d9ef">from</span>(<span style="color:#a6e22e">iv</span>, <span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decrypted</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Buffer</span>.<span style="color:#a6e22e">concat</span>([
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">decipher</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">Buffer</span>.<span style="color:#66d9ef">from</span>(<span style="color:#a6e22e">ciphertext</span>, <span style="color:#e6db74">&#39;hex&#39;</span>)),
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">decipher</span>.<span style="color:#a6e22e">final</span>()
+</span></span><span style="display:flex;"><span>            ])
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;0x&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">decrypted</span>.<span style="color:#a6e22e">toString</span>(<span style="color:#e6db74">&#39;hex&#39;</span>)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;解密私钥失败:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 保存 KeyStore 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {Object} keystore - KeyStore 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {string} filePath - 保存路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">saveKeystore</span>(<span style="color:#a6e22e">keystore</span>, <span style="color:#a6e22e">filePath</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// 确保目录存在
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">mkdir</span>(<span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">dirname</span>(<span style="color:#a6e22e">filePath</span>), { <span style="color:#a6e22e">recursive</span>: <span style="color:#66d9ef">true</span> })
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">writeFile</span>(
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">filePath</span>,
+</span></span><span style="display:flex;"><span>                <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">stringify</span>(<span style="color:#a6e22e">keystore</span>, <span style="color:#66d9ef">null</span>, <span style="color:#ae81ff">2</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;utf8&#39;</span>
+</span></span><span style="display:flex;"><span>            )
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;KeyStore 文件已保存到:&#39;</span>, <span style="color:#a6e22e">filePath</span>)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;保存 KeyStore 文件失败:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * 加载 KeyStore 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @param {string} filePath - KeyStore 文件路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     * @returns {Object} KeyStore 对象
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">     */</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">async</span> <span style="color:#a6e22e">loadKeystore</span>(<span style="color:#a6e22e">filePath</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">data</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">fs</span>.<span style="color:#a6e22e">readFile</span>(<span style="color:#a6e22e">filePath</span>, <span style="color:#e6db74">&#39;utf8&#39;</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">JSON</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#a6e22e">data</span>)
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;加载 KeyStore 文件失败:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">error</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">KeystoreUtils</span> 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ts" data-lang="ts"><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">KeystoreUtils</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;./keystore_utils.js&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">path</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;path&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">dotenv</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;dotenv&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">dotenv</span>.<span style="color:#a6e22e">config</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">async</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">demo() {</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 1. 从环境变量获取私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">privateKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">env</span>.<span style="color:#a6e22e">PRIVATE_KEY</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">privateKey</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;请在 .env 文件中设置 PRIVATE_KEY&#39;</span>)
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;原始私钥:&#39;</span>, <span style="color:#a6e22e">privateKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 2. 设置密码和文件路径
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;123456&#39;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">keystorePath</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">process</span>.<span style="color:#a6e22e">cwd</span>(), <span style="color:#e6db74">&#39;.keys&#39;</span>, <span style="color:#e6db74">&#39;keystore.json&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 3. 加密私钥并生成 KeyStore
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;\n开始加密私钥...&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">keystore</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">KeystoreUtils</span>.<span style="color:#a6e22e">encryptPrivateKey</span>(<span style="color:#a6e22e">privateKey</span>, <span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;KeyStore 生成成功&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 4. 保存 KeyStore 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">KeystoreUtils</span>.<span style="color:#a6e22e">saveKeystore</span>(<span style="color:#a6e22e">keystore</span>, <span style="color:#a6e22e">keystorePath</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 5. 加载 KeyStore 文件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;\n开始加载 KeyStore 文件...&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">loadedKeystore</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">KeystoreUtils</span>.<span style="color:#a6e22e">loadKeystore</span>(<span style="color:#a6e22e">keystorePath</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;KeyStore 文件加载成功&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// 6. 解密私钥
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;\n开始解密私钥...&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">decryptedPrivateKey</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">await</span> <span style="color:#a6e22e">KeystoreUtils</span>.<span style="color:#a6e22e">decryptPrivateKey</span>(<span style="color:#a6e22e">loadedKeystore</span>, <span style="color:#a6e22e">password</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;解密后的私钥:&#39;</span>, <span style="color:#a6e22e">decryptedPrivateKey</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;私钥是否一致:&#39;</span>, <span style="color:#a6e22e">privateKey</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">decryptedPrivateKey</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">error</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">error</span>(<span style="color:#e6db74">&#39;演示过程出错:&#39;</span>, <span style="color:#a6e22e">error</span>)
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 执行演示
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">demo</span>() 
+</span></span></code></pre></div>
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+      <h3 id="see-also-in-wallet系列">
+        See also in Wallet系列
+        <a class="heading-link" href="#see-also-in-wallet%e7%b3%bb%e5%88%97">
+          <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+          <span class="sr-only">Link to heading</span>
+        </a>
+      </h3>
+      <nav>
+        <ul>
+        
+        
+          
+            <li>
+              <a href="/posts/aa%E9%92%B1%E5%8C%85/">深入AA钱包</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/eip3074/">深入EIP3074</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/wallet-contract/">深入contract-wallet</a>
+            </li>
+          
+        
+          
+        
+          
+            <li>
+              <a href="/posts/mpc/">深入MPC</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="/posts/%E5%A4%9A%E7%AD%BE%E9%92%B1%E5%8C%85/">深入多签钱包</a>
+            </li>
+          
+        
+        </ul>
+      </nav>
+    
+  
+</section>
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>
